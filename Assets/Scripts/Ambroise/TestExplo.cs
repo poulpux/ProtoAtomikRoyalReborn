@@ -25,5 +25,7 @@ public class TestExplo : MonoBehaviour
         Debug.Log(objet.name);
         Fracture fracture = objet.GetComponent<Fracture>();
         fracture.ComputeFracture();
+
+        fracture.fragmentRoot.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up*0.2f + transform.rotation.eulerAngles , ForceMode.Impulse);
     }
 }
