@@ -50,9 +50,10 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     }
     private void ZQSDMouvement()
     {
-        Vector2 dir = direction();
-        dir.Normalize();
-        rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.y * spdMoovement);
+        Vector3 dir = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f);
+        //Vector2 dir = direction();
+        //dir.Normalize();
+        rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
     }
     private Vector2 direction()
     {
