@@ -21,7 +21,7 @@ public class Fracture : MonoBehaviour
     /// <summary>
     /// Collector object that stores the produced fragments
     /// </summary>
-    private GameObject fragmentRoot;
+    public GameObject fragmentRoot;
 
     [ContextMenu("Print Mesh Info")]
     public void PrintMeshInfo()
@@ -120,7 +120,7 @@ public class Fracture : MonoBehaviour
     /// Compute the fracture and create the fragments
     /// </summary>
     /// <returns></returns>
-    private void ComputeFracture()
+    public void ComputeFracture()
     {
         var mesh = this.GetComponent<MeshFilter>().sharedMesh;
 
