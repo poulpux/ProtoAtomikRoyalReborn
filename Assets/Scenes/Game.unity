@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 1053549149}
   - component: {fileID: 1053549148}
   - component: {fileID: 1053549155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Camera: {fileID: 330585545}
   _grenadePrefab: {fileID: 2031062099240371989, guid: 7a04c78713e141b4b83c00cf44eb57fb, type: 3}
+  _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
   _throwForce: 10
   _timerExplosion: 1.5
 --- !u!1 &1374149083
