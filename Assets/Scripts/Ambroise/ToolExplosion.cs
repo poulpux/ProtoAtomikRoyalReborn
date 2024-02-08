@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class ToolExplosion : MonoBehaviour
 {
-    static public float reductionTime = 2f;
+    static public float reductionTime = 10f;
 
     static public void BrokeObject(GameObject objectToDestroy, Transform bombTransform, float power)
     {
-        Vector3 oppositeDirection = (objectToDestroy.transform.position - bombTransform.position).normalized;
         Fracture fracture = objectToDestroy.GetComponent<Fracture>();
-        fracture.ComputeFracture();
-
-        fracture.fragmentRoot.GetComponentInChildren<Rigidbody>().AddForce(oppositeDirection * power, ForceMode.Impulse);
-
-        Transform[] listChildren = fracture.fragmentRoot.GetComponentsInChildren<Transform>();
-        // Utilisez une coroutine pour la destruction progressive
-        foreach (var item in listChildren)
+        if (fracture != null)
         {
-            Debug.Log(item.name);
-            CoroutineHelper.StartScaleAndDestroyCoroutine(item.gameObject);
+            Vector3 oppositeDirection = (objectToDestroy.transform.position - (bombTransform.position-Vector3.up)).normalized;
+            fracture.ComputeFracture();
+            DestroyParents(fracture.fragmentRoot);
+
+            fracture.fragmentRoot.GetComponentInChildren<Rigidbody>().AddForce(oppositeDirection * power, ForceMode.Impulse);
+
+            Transform[] listChildren = fracture.fragmentRoot.GetComponentsInChildren<Transform>();
+            // Utilisez une coroutine pour la destruction progressive
+            foreach (var item in listChildren)
+            {
+                StartScaleAndDestroyCoroutine(item.gameObject);
+            }
+
+            Destroy(objectToDestroy);
         }
     }
-}
 
-public class CoroutineHelper : MonoBehaviour
-{
-    // Fonction statique pour lancer la coroutine
     public static void StartScaleAndDestroyCoroutine(GameObject objectToDestroy)
     {
         MonoBehaviour script = objectToDestroy.AddComponent<ScaleAndDestroy>();
@@ -38,6 +39,13 @@ public class CoroutineHelper : MonoBehaviour
             // Lancer la coroutine depuis cet objet
             scaleAndDestroyScript.StartCoroutine(scaleAndDestroyScript.WillBeDestroy());
         }
+    }
+
+    public static void DestroyParents(GameObject fragmentMother)
+    {
+        ScaleAndDestroy scaleAndDestroyScript = fragmentMother.AddComponent<ScaleAndDestroy>();
+        if (scaleAndDestroyScript != null)
+        scaleAndDestroyScript.StartCoroutine(scaleAndDestroyScript.DestroyAll());
     }
 }
 
@@ -65,7 +73,22 @@ public class ScaleAndDestroy : MonoBehaviour
         // Assurez-vous que la scale est correcte à la fin
         transform.localScale = Vector3.one * 0.1f;
 
-        // Détruire l'objet
+        //// Détruire l'objet
+        //Destroy(gameObject);
+    }
+
+    public IEnumerator DestroyAll()
+    {
+        yield return new WaitForSeconds(ToolExplosion.reductionTime);
+        float elapsedTime = 0f;
+
+        Vector2 posBase = new Vector2(transform.position.x, transform.position.z);
+        while (elapsedTime < ToolExplosion.reductionTime)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
         Destroy(gameObject);
     }
 }
