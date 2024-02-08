@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private Image _imageTimerDash;
+    [SerializeField] PlayerSlide _playerSlide;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void UpdateViewTimerDash()
+    {
+        _imageTimerDash.fillAmount = _playerSlide._timerCanDash / _playerSlide._timerCanDashSAVE;
     }
 }

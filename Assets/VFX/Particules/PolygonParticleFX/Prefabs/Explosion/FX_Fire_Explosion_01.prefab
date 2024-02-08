@@ -9294,7 +9294,7 @@ GameObject:
   - component: {fileID: 4150649967365504}
   - component: {fileID: 198195352207415246}
   - component: {fileID: 199942670210766882}
-  - component: {fileID: 2867357533277293139}
+  - component: {fileID: -254506054061187915}
   m_Layer: 0
   m_Name: FX_Fire_Explosion_01
   m_TagString: Untagged
@@ -13932,7 +13932,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &2867357533277293139
+--- !u!114 &-254506054061187915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -16,9 +16,17 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     [TextArea]
     public string AboutTool = "C'est un outil qui Garenti des mouvements pour FPS cleans dont:\r\n-Horizontal / Vertical pour le player.\r\n-Rotation de cam qui marche et la camera qui se bloque.";
     float rotationX;
+    [SerializeField] private float _speedRun;
+    private float _speedSave;
+    [HideInInspector] public bool _isRunning = false;
+    [SerializeField] private PlayerCrounch _playerCrounch;
+    [HideInInspector] public Vector3 crounchScale;
+    [HideInInspector] public Vector3 actualScale;
+    [HideInInspector] public bool _isCrounch = false;
     // Start is called before the first frame update
     void Start()
     {
+        _speedSave = spdMoovement;
         rb = GetComponent<Rigidbody>();
         //On rend invisible la souris
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,6 +37,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     {
         CamRotation();
         ZQSDMouvement();
+        Run();
     }
     //Will Make all rotation of cam
     private void CamRotation()
@@ -58,5 +67,37 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     private Vector2 direction()
     {
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
+    private void Run()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && _isCrounch == false)
+        {
+            IncreaseSpeed();
+            _isRunning = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            DecreaseSpeed();
+            _isRunning = false;
+        }
+        if (_isCrounch == true)
+            DecreaseSpeedWhileRun();
+
+    }
+    public float GetIncreaseSpeed()
+    {
+        return spdMoovement = _speedRun;
+    }
+    public void IncreaseSpeed()
+    {
+        spdMoovement = _speedRun;
+    }
+    public void DecreaseSpeed()
+    {
+        spdMoovement = _speedSave;
+    }
+    public void DecreaseSpeedWhileRun()
+    {
+        spdMoovement = _speedSave / 2f;
     }
 }
