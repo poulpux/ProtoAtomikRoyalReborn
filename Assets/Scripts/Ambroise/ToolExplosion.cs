@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ToolExplosion : MonoBehaviour
 {
-    static public float reductionTime = 10f;
+    static public float reductionTime = 20f;
 
     static public void BrokeObject(GameObject objectToDestroy, Transform bombTransform, float power)
     {
@@ -66,7 +66,7 @@ public class ScaleAndDestroy : MonoBehaviour
             transform.position = new Vector3(posBase.x, transform.position.y, posBase.y);
             float t = elapsedTime / ToolExplosion.reductionTime;
             transform.localScale = Vector3.Lerp(initialScale, Vector3.one * 0.1f, t);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime * 3f;
             yield return null;
         }
 
