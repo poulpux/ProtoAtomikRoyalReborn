@@ -10,13 +10,14 @@ public class Grenade : MonoBehaviour
     [SerializeField] private Explosion _explosion;
     [SerializeField] private float forceExplosion;
     [SerializeField] private float radiusExplosion;
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
 
     private void OnDestroy()
     {
         Explosion explosion = Instantiate(_explosion, transform.position, Quaternion.identity);
         explosion._forceExplosion = forceExplosion;
         explosion._radiusExplosion = radiusExplosion;
+        explosion.damage = damage;
     }
 
     private void OnCollisionEnter(Collision collision)

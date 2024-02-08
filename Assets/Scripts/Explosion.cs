@@ -9,6 +9,7 @@ public class Explosion : MonoBehaviour
     [SerializeField] private LayerMask _layer;
     [HideInInspector] public float _radiusExplosion;
     [HideInInspector] public float _forceExplosion;
+    [HideInInspector] public int damage;
     void Start()
     {
         GameObject particule = Instantiate(_particulePrefab, transform.position, Quaternion.identity);
@@ -17,8 +18,8 @@ public class Explosion : MonoBehaviour
 
     private void OnDestroy()
     {
-        ExploRange();
         Explose();
+        ExploRange();
     }
 
     private void ExploRange()
@@ -55,7 +56,9 @@ public class Explosion : MonoBehaviour
 
         foreach (var item in nearbyObjects)
         {
-            ToolExplosion.BrokeObject(item, transform, _forceExplosion);
+           PvEnviro pvEnviro = item.GetComponent<PvEnviro>();
+            if (pvEnviro != null)
+                pvEnviro.GetExplose(this);
         }
     }
 
