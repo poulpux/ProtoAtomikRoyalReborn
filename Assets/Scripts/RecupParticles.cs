@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class RecupParticles : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem shooteffect;
 
 
     void Start()
     {
-        
+        shooteffect.startLifetime = 0;
     }
 
 
