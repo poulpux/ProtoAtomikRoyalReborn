@@ -6,7 +6,7 @@ public class ToolExplosion : MonoBehaviour
 {
     static public float reductionTime = 20f;
 
-    static public void BrokeObject(GameObject objectToDestroy, Transform bombTransform, float power, bool destroyFragment)
+    static public void BrokeObject(GameObject objectToDestroy, Transform bombTransform, float power, bool destroyFragment, float timeToDestroy)
     {
         Fracture fracture = objectToDestroy.GetComponent<Fracture>();
         if (fracture != null)
@@ -27,7 +27,7 @@ public class ToolExplosion : MonoBehaviour
                 // Utilisez une coroutine pour la destruction progressive
                 foreach (var item in listChildren)
                 {
-                    StartScaleAndDestroyCoroutine(item.gameObject);
+                    StartScaleAndDestroyCoroutine(item.gameObject, timeToDestroy);
                 }
             }
 
@@ -35,7 +35,7 @@ public class ToolExplosion : MonoBehaviour
         }
     }
 
-    public static void StartScaleAndDestroyCoroutine(GameObject objectToDestroy)
+    public static void StartScaleAndDestroyCoroutine(GameObject objectToDestroy, float timeToDestroy)
     {
         MonoBehaviour script = objectToDestroy.AddComponent<ScaleAndDestroy>();
         ScaleAndDestroy scaleAndDestroyScript = script as ScaleAndDestroy;
@@ -44,7 +44,7 @@ public class ToolExplosion : MonoBehaviour
         if (scaleAndDestroyScript != null)
         {
             // Lancer la coroutine depuis cet objet
-            scaleAndDestroyScript.StartCoroutine(scaleAndDestroyScript.WillBeDestroy());
+            scaleAndDestroyScript.StartCoroutine(scaleAndDestroyScript.WillBeDestroy(timeToDestroy));
         }
     }
 
@@ -59,19 +59,19 @@ public class ToolExplosion : MonoBehaviour
 public class ScaleAndDestroy : MonoBehaviour
 {
     // Méthode pour la coroutine
-    public IEnumerator WillBeDestroy()
+    public IEnumerator WillBeDestroy(float timeToDestoy)
     {
-        yield return new WaitForSeconds(ToolExplosion.reductionTime);
+        yield return new WaitForSeconds(timeToDestoy);
 
         // Réduction progressive de la scale
         float elapsedTime = 0f;
         Vector3 initialScale = transform.localScale;
 
         Vector2 posBase = new Vector2(transform.position.x, transform.position.z);
-        while (elapsedTime < ToolExplosion.reductionTime)
+        while (elapsedTime < timeToDestoy)
         {
             transform.position = new Vector3(posBase.x, transform.position.y, posBase.y);
-            float t = elapsedTime / ToolExplosion.reductionTime;
+            float t = elapsedTime / timeToDestoy;
             transform.localScale = Vector3.Lerp(initialScale, Vector3.one * 0.1f, t);
             elapsedTime += Time.deltaTime * 3f;
             yield return null;

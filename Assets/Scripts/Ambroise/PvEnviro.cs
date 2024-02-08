@@ -11,6 +11,8 @@ public class PvEnviro : MonoBehaviour
     private bool CleanFragement = true;
     [SerializeField]
     private int maxHp;
+    [SerializeField]
+    private float timeToDestruct = 5f;
 
     private int hp;
     private Rigidbody rb;
@@ -27,7 +29,7 @@ public class PvEnviro : MonoBehaviour
         if (IsDead() && isDestroyable)
         {
             rb.isKinematic = false;
-            ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement);
+            ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement, timeToDestruct);
         }
         else if (IsDead())
             Destroy(gameObject);
