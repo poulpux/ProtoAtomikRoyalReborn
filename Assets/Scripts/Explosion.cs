@@ -17,21 +17,31 @@ public class Explosion : MonoBehaviour
 
     private void OnDestroy()
     {
-        PousseExplo();
+        ExploRange();
         Explose();
     }
 
-    private void PousseExplo()
+    private void ExploRange()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radiusExplosion);
-        Debug.Log(colliders.Length);
         foreach (Collider collider in colliders)
         {
-            Rigidbody other = collider.GetComponent<Rigidbody>();
-
-            if (other != null)
-                other.AddExplosionForce(_forceExplosion,transform.position, _radiusExplosion,3f);
+            ExploseOtherMines(collider);
+            PousseObjects(collider);
         }
+    }
+
+    private void PousseObjects(Collider collider)
+    {
+        Rigidbody other = collider.GetComponent<Rigidbody>();
+        if (other != null)
+            other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
+    }
+
+    private void ExploseOtherMines(Collider collider)
+    {
+        if(collider.tag == "Mine")
+            Destroy(collider.gameObject);
     }
 
     private void Explose()
