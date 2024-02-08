@@ -69,11 +69,9 @@ public class PlayerGrimpette : MonoBehaviour
                 Vector3 pos = transform.position;
                 Tools.PlayCurve(ref animCurveVertical,ref pos);
                 transform.position = pos;
-                Debug.Log("a");
             }
             else
             {
-                Debug.Log("b");
                 Vector3 pos = transform.position;
                 Tools.PlayCurve(ref animCurveHorizontal, ref pos);
                 transform.position = pos;
