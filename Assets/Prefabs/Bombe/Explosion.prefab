@@ -47,6 +47,6 @@ MonoBehaviour:
   _particulePrefab: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
   _layer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   _radiusExplosion: 0
   _forceExplosion: 0
