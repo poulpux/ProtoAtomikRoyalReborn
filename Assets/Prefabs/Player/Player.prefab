@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5414318120052967593}
   - component: {fileID: 1389234298885238022}
   - component: {fileID: 8349278144392884709}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5778e732b092a4cb7f2205b81b113d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPow: 500
+  jumpPow: 700
   AboutTool: "Attention : Mettre la layer (Player) au Player. \nFonction de saut
     opti, detection du sol grace a un raycasting aux pied du personnage. "
 --- !u!114 &1047863495760492769
@@ -201,7 +201,7 @@ MonoBehaviour:
   _Camera: {fileID: 784421028810189147}
   _grenadePrefab: {fileID: 8433283994375064560, guid: c8238286153cd1c4794894ef877a5ecd, type: 3}
   _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
-  _throwForce: 10
+  _throwForce: 30
 --- !u!114 &5414318120052967593
 MonoBehaviour:
   m_ObjectHideFlags: 0
