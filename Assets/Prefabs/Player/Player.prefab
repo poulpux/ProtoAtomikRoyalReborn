@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1047863495760492769}
   - component: {fileID: 5414318120052967593}
   - component: {fileID: 1389234298885238022}
+  - component: {fileID: 8349278144392884709}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -164,9 +165,9 @@ MonoBehaviour:
 
     -Rotation de cam qui marche et la camera qui
     se bloque.'
-  _speedRun: 0
+  _speedRun: 10
   _isRunning: 0
-  _playerCrounch: {fileID: 0}
+  _playerCrounch: {fileID: 5414318120052967593}
   crounchScale: {x: 0, y: 0, z: 0}
   actualScale: {x: 0, y: 0, z: 0}
   _isCrounch: 0
@@ -231,6 +232,20 @@ MonoBehaviour:
   _movementAndCameraFPS: {fileID: 1776049372590630128}
   _timerCanDash: 0
   _timerCanDashSAVE: 3
+--- !u!114 &8349278144392884709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668020835825646455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f794939be23e6374695d1e8372f083d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceAttrape: 3
+  timeToGrimpe: 0.5
 --- !u!1 &9096226407825735963
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +312,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

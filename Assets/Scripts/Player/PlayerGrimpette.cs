@@ -48,7 +48,7 @@ public class PlayerGrimpette : MonoBehaviour
             {
                 Quaternion rotationY = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                 Vector3 rayDirection = rotationY * Vector3.forward;
-                Vector3 rayOrigin = transform.position +(hit.distance + 0.1f) * rayDirection + Vector3.up * 1.5f;
+                Vector3 rayOrigin = transform.position +(hit.distance + 0.1f) * rayDirection + Vector3.up * 1.2f;
 
                 Ray ray2 = new Ray(rayOrigin, -transform.up);
                 if (Physics.Raycast(ray2, out RaycastHit hit2, 2.5f))
