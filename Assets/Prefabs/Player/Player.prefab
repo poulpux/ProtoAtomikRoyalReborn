@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5778e732b092a4cb7f2205b81b113d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPow: 300
+  jumpPow: 500
   AboutTool: "Attention : Mettre la layer (Player) au Player. \nFonction de saut
     opti, detection du sol grace a un raycasting aux pied du personnage. "
 --- !u!114 &1047863495760492769
@@ -231,7 +231,6 @@ MonoBehaviour:
   _movementAndCameraFPS: {fileID: 1776049372590630128}
   _timerCanDash: 0
   _timerCanDashSAVE: 3
-  uIScript: {fileID: 0}
 --- !u!1 &9096226407825735963
 GameObject:
   m_ObjectHideFlags: 0

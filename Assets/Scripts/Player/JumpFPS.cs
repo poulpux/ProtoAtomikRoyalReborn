@@ -36,7 +36,7 @@ public class JumpFPS : MonoBehaviour
         rb.AddForce(Vector3.up * jumpPow, ForceMode.Impulse);
         timerJump = 0;
     }
-    private bool testToucheGround()
+    public bool testToucheGround()
     {
         Ray ray = new Ray(transform.position, -transform.up);
         return Physics.Raycast(ray, out RaycastHit hit, transform.localScale.y + 0.2f, ~(1 << LayerMask.NameToLayer("Player"))) ? true : false;
