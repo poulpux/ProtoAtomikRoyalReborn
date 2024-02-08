@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    [SerializeField] private GameObject _particulePrefab;
     [SerializeField] private LayerMask _layer;
     [HideInInspector] public float _radiusExplosion;
     [HideInInspector] public float _forceExplosion;
     void Start()
     {
         Debug.Log("explosion");
+        GameObject particule = Instantiate(_particulePrefab, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 

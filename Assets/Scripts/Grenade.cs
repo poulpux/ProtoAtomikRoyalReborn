@@ -17,4 +17,12 @@ public class Grenade : MonoBehaviour
         explosion._forceExplosion = forceExplosion;
         explosion._radiusExplosion = radiusExplosion;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision != null)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
