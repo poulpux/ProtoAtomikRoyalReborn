@@ -8,6 +8,8 @@ public class PvEnviro : MonoBehaviour
     [SerializeField]
     private bool isDestroyable = true;
     [SerializeField]
+    private bool CleanFragement = true;
+    [SerializeField]
     private int maxHp;
 
     private int hp;
@@ -25,7 +27,7 @@ public class PvEnviro : MonoBehaviour
         if (IsDead() && isDestroyable)
         {
             rb.isKinematic = false;
-            ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion);
+            ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement);
         }
         else if (IsDead())
             Destroy(gameObject);

@@ -6,22 +6,25 @@ public class ToolExplosion : MonoBehaviour
 {
     static public float reductionTime = 20f;
 
-    static public void BrokeObject(GameObject objectToDestroy, Transform bombTransform, float power)
+    static public void BrokeObject(GameObject objectToDestroy, Transform bombTransform, float power, bool destroyFragment)
     {
         Fracture fracture = objectToDestroy.GetComponent<Fracture>();
         if (fracture != null)
         {
             Vector3 oppositeDirection = (objectToDestroy.transform.position - (bombTransform.position-Vector3.up)).normalized;
             fracture.ComputeFracture();
-            DestroyParents(fracture.fragmentRoot);
 
             fracture.fragmentRoot.GetComponentInChildren<Rigidbody>().AddForce(oppositeDirection * power, ForceMode.Impulse);
 
-            Transform[] listChildren = fracture.fragmentRoot.GetComponentsInChildren<Transform>();
-            // Utilisez une coroutine pour la destruction progressive
-            foreach (var item in listChildren)
+            if (destroyFragment)
             {
-                StartScaleAndDestroyCoroutine(item.gameObject);
+                DestroyParents(fracture.fragmentRoot);
+                Transform[] listChildren = fracture.fragmentRoot.GetComponentsInChildren<Transform>();
+                // Utilisez une coroutine pour la destruction progressive
+                foreach (var item in listChildren)
+                {
+                    StartScaleAndDestroyCoroutine(item.gameObject);
+                }
             }
 
             Destroy(objectToDestroy);
