@@ -36,12 +36,16 @@ public class Explosion : MonoBehaviour
     {
         Rigidbody other = collider.GetComponent<Rigidbody>();
         if (other != null)
+        {
             other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
+            if (other.gameObject.tag == "Fragment")
+                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+        }
     }
 
     private void ExploseOtherMines(Collider collider)
     {
-        if(collider.tag == "Mine")
+        if (collider.tag == "Mine")
             Destroy(collider.gameObject);
     }
 
@@ -56,7 +60,7 @@ public class Explosion : MonoBehaviour
 
         foreach (var item in nearbyObjects)
         {
-           PvEnviro pvEnviro = item.GetComponent<PvEnviro>();
+            PvEnviro pvEnviro = item.GetComponent<PvEnviro>();
             if (pvEnviro != null)
                 pvEnviro.GetExplose(this);
         }

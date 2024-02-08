@@ -16,10 +16,14 @@ public class ToolExplosion : MonoBehaviour
 
             fracture.fragmentRoot.GetComponentInChildren<Rigidbody>().AddForce(oppositeDirection * power, ForceMode.Impulse);
 
+            Transform[] listChildren = fracture.fragmentRoot.GetComponentsInChildren<Transform>();
+            foreach (var item in listChildren)
+            {
+                item.tag = "Fragment";
+            }
             if (destroyFragment)
             {
                 DestroyParents(fracture.fragmentRoot);
-                Transform[] listChildren = fracture.fragmentRoot.GetComponentsInChildren<Transform>();
                 // Utilisez une coroutine pour la destruction progressive
                 foreach (var item in listChildren)
                 {

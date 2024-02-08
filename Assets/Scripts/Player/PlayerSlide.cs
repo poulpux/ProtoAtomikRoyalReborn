@@ -15,8 +15,12 @@ public class PlayerSlide : MonoBehaviour
     public float _timerCanDashSAVE;
     private bool _canCalculTimer = false;
     private bool _canDash = true;
-    [SerializeField] private UIScript uIScript;
+    private UIScript uIScript;
 
+    private void Start()
+    {
+        uIScript = FindAnyObjectByType<UIScript>();
+    }
     void Update()
     {
         Crounch();
