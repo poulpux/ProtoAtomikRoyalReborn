@@ -12,7 +12,7 @@ public class Mine : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.GetComponent<PlayerMovementAndCameraFPS>() != null)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             StartCoroutine(CoroutineIsPressed());
         }
