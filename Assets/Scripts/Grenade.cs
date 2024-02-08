@@ -13,7 +13,7 @@ public class Grenade : MonoBehaviour
 
     private void OnDestroy()
     {
-        Explosion explosion = Instantiate(_explosion, transform.position, Quaternion.identity);
+        Explosion explosion = Instantiate(_explosion, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), Quaternion.identity);
         explosion._forceExplosion = forceExplosion;
         explosion._radiusExplosion = radiusExplosion;
     }

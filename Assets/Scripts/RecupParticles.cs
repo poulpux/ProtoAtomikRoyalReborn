@@ -5,16 +5,12 @@ using UnityEngine;
 public class RecupParticles : MonoBehaviour
 {
     [SerializeField] private ParticleSystem shooteffect;
+    private float timer = 0f;
 
-
-    void Start()
+    private void Update()
     {
-        shooteffect.startLifetime = 0;
-    }
-
-
-    void Update()
-    {
-        
+        timer += Time.deltaTime;
+        if (timer > shooteffect.startLifetime)
+            Destroy(this.gameObject);
     }
 }
