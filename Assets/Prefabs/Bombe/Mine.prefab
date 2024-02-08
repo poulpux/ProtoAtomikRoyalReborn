@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5485964692962326198}
   - component: {fileID: 6982526881992882106}
   - component: {fileID: 8548817721259517754}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mine
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,9 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosion: {fileID: 5014017034759109011, guid: 707585fb51e90d14bb573e7a8cce9b41, type: 3}
-  forceExplosion: 500
+  forceExplosion: 12000
   radiusExplosion: 10
   _timerExplosion: 0.25
+  damage: 8
 --- !u!64 &8548817721259517754
 MeshCollider:
   m_ObjectHideFlags: 0

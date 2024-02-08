@@ -16,6 +16,6 @@ public class TestExplo : MonoBehaviour
     {
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 10f, (1 << LayerMask.NameToLayer("Destructible"))))
-            ToolExplosion.BrokeObject(hit.collider.gameObject, transform, 100f);
+            ToolExplosion.BrokeObject(hit.collider.gameObject, transform, 100f, true);
     }
 }

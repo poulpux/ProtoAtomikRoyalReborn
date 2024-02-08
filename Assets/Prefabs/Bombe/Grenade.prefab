@@ -149,7 +149,8 @@ MonoBehaviour:
   rb: {fileID: 7878746630849473904}
   _layer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   _explosion: {fileID: 5014017034759109011, guid: 707585fb51e90d14bb573e7a8cce9b41, type: 3}
-  forceExplosion: 500
-  radiusExplosion: 100
+  forceExplosion: 5000
+  radiusExplosion: 3
+  damage: 5

@@ -8,10 +8,11 @@ public class Mine : MonoBehaviour
     [SerializeField] private float forceExplosion;
     [SerializeField] private float radiusExplosion;
     [SerializeField] private float _timerExplosion;
+    [SerializeField] private int damage;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.GetComponent<PlayerMovementAndCameraFPS>() != null)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             StartCoroutine(CoroutineIsPressed());
         }
@@ -22,6 +23,7 @@ public class Mine : MonoBehaviour
         Explosion explosion = Instantiate(_explosion, new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z), Quaternion.identity);
         explosion._forceExplosion = forceExplosion;
         explosion._radiusExplosion = radiusExplosion;
+        explosion.damage = damage;
     }
 
     private IEnumerator CoroutineIsPressed()
