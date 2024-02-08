@@ -52,7 +52,13 @@ public class PlayerGrimpette : MonoBehaviour
 
                 Ray ray2 = new Ray(rayOrigin, -transform.up);
                 if (Physics.Raycast(ray2, out RaycastHit hit2, 2.5f))
-                    return rayOrigin;
+                {
+                    Debug.Log(rayOrigin + Vector3.up * (hit2.distance + 0.4f));
+                    Ray ray3 = new Ray( transform.position, transform.up);
+                    Ray ray4 = new Ray( transform.position+ transform.forward, transform.up);
+                    if (!Physics.Raycast(ray3, out RaycastHit hit3, 3) && !Physics.Raycast(ray4, out RaycastHit hit4, 3))
+                        return rayOrigin + Vector3.up * (hit2.distance+0.4f);
+                }
                 else
                     return Vector3.zero;
             }

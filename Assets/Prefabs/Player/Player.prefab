@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f794939be23e6374695d1e8372f083d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAttrape: 3
+  distanceAttrape: 2
   timeToGrimpe: 0.5
 --- !u!1 &9096226407825735963
 GameObject:
