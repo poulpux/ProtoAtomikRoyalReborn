@@ -19,7 +19,6 @@ public class ParcoursDuCombattantLauncher : MonoBehaviour
     float timer;
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetFloat("BestScore").ToString("F2"));
         InstantiateAll();
     }
 
@@ -102,21 +101,23 @@ public class ParcoursDuCombattantLauncher : MonoBehaviour
 
     public void LevelFinish()
     {
-        float timerSafe = timer;
-        InstantiateAll();
-        if (timerSafe < PlayerPrefs.GetFloat("BestScore"))
+        if (isDoingParcours)
         {
-            PlayerPrefs.SetFloat("BestScore", timerSafe);
-            StartCoroutine(NouveauScore(true));
+            float timerSafe = timer;
+            InstantiateAll();
+            if (timerSafe < PlayerPrefs.GetFloat("BestScore"))
+            {
+                PlayerPrefs.SetFloat("BestScore", timerSafe);
+                StartCoroutine(NouveauScore(true));
+            }
+            else
+                StartCoroutine(NouveauScore(false, timerSafe));
         }
-        else
-            StartCoroutine(NouveauScore(false, timerSafe));
 
     }
 
     private IEnumerator NouveauScore(bool hightscore, float timerSave = 0f)
     {
-        Debug.Log("passe");
         text.text = hightscore ? "NEW HIGHTSCORE !!! : " + PlayerPrefs.GetFloat("BestScore").ToString("F2") : "Score : " + timerSave.ToString("F2");
         text.fontSize = 80f;
 
