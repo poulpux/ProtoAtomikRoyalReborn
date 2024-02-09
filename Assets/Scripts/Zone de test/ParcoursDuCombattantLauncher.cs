@@ -85,7 +85,7 @@ public class ParcoursDuCombattantLauncher : MonoBehaviour
         else
             text.text = "3";
 
-        player.transform.position = spawnPos.transform.position;
+        player.transform.position = spawnPos.transform.position+Vector3.up*0.5f;
     }
 
     private void DuringParcours()
