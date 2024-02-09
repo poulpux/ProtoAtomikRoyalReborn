@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCrounch : MonoBehaviour
 {
     [SerializeField] private PlayerMovementAndCameraFPS _playerMovementAndCameraFPS;
+    private bool needToGoUP;
 
     void Start()
     {
@@ -22,10 +23,32 @@ public class PlayerCrounch : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.F) && _playerMovementAndCameraFPS._isRunning == false)
         {
-            _playerMovementAndCameraFPS.DecreaseSpeed();
-            _playerMovementAndCameraFPS._isCrounch = false;
-            transform.localScale = _playerMovementAndCameraFPS.actualScale;
-            transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+            Ray ray = new Ray(transform.position, transform.up);
+            if (!Physics.Raycast(ray, out RaycastHit hit, 0.55f))
+                SeReleve();
+            else
+                needToGoUP = true;
         }
+
+        NeedToWalk();
+    }
+
+    private void NeedToWalk()
+    {
+        if(needToGoUP)
+        {
+            Ray ray = new Ray(transform.position, transform.up);
+            if (!Physics.Raycast(ray, out RaycastHit hit, 0.55f))
+                SeReleve();
+        }
+    }
+
+    private void SeReleve()
+    {
+        _playerMovementAndCameraFPS.DecreaseSpeed();
+        _playerMovementAndCameraFPS._isCrounch = false;
+        transform.localScale = _playerMovementAndCameraFPS.actualScale;
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        needToGoUP = false;
     }
 }

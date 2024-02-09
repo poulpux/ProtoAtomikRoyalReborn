@@ -82,7 +82,7 @@ public class PlayerSlide : MonoBehaviour
     {
         if (_canCalculTimer == true)
         {
-            uIScript.UpdateViewTimerDash();
+            //uIScript.UpdateViewTimerDash();
             _timerCanDash += Time.deltaTime;
             if (_timerCanDash >= _timerCanDashSAVE)
             {
