@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerCrounch : MonoBehaviour
 {
     [SerializeField] private PlayerMovementAndCameraFPS _playerMovementAndCameraFPS;
-    private bool needToGoUP;
+    [HideInInspector]
+    public bool needToGoUP;
 
     void Start()
     {
