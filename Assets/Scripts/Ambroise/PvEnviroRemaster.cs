@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Fracture))]
-public class PvEnviro : MonoBehaviour
+public class PvEnviroRemaster : MonoBehaviour
 {
     [SerializeField]
     private bool isDestroyable = true;
@@ -14,25 +14,22 @@ public class PvEnviro : MonoBehaviour
     [SerializeField]
     private float timeToDestruct = 5f;
 
-    [SerializeField]
-    DestructionParMur parent;
     private int hp;
-    private Rigidbody rb;
+    private Fracture fracture;
     void Start()
     {
         hp = maxHp;
-        rb = GetComponent<Rigidbody>();
+        fracture = GetComponent<Fracture>(); 
+        fracture.enabled = false;
     }
-
-    
 
     public void GetExplose(Explosion explo)
     {
         hp -= explo.damage;
         if (IsDead() && isDestroyable)
         {
-            parent.DestroyColliderEvent.Invoke(gameObject);
-            rb.isKinematic = false;
+            fracture.enabled = false;
+            Debug.Log("mort");
             ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement, timeToDestruct);
         }
         else if (IsDead())
