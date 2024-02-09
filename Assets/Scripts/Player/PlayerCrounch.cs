@@ -17,6 +17,7 @@ public class PlayerCrounch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && _playerMovementAndCameraFPS._isRunning == false)
         {
+            needToGoUP = false;
             _playerMovementAndCameraFPS._isCrounch = true;
             transform.localScale = _playerMovementAndCameraFPS.crounchScale;
             transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
