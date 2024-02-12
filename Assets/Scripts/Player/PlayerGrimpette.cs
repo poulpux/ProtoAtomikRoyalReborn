@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(JumpFPS))]
@@ -15,6 +16,9 @@ public class PlayerGrimpette : MonoBehaviour
 
     private Vector3 posToGo;
     private AnimatingCurve animCurveVertical, animCurveHorizontal;
+
+    [SerializeField]
+    private PlayerMovementAndCameraFPS config;
     void Start()
     {
         jump = GetComponent<JumpFPS>();
@@ -22,7 +26,9 @@ public class PlayerGrimpette : MonoBehaviour
 
     void Update()
     {
-        if(!jump.testToucheGround() && Input.GetKeyDown(KeyCode.Space))
+        if(config.controler == CONTROLER.CLAVIER && !jump.testToucheGround() && Input.GetKeyDown(KeyCode.Space))
+            tryGrimpette();
+        else if(config.controler == CONTROLER.MANETTE && !jump.testToucheGround() && config.MyControler != null  && config.MyControler.buttonSouth.IsPressed() == true)
             tryGrimpette();
         PlayCurve();
     }

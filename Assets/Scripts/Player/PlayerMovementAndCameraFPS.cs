@@ -28,6 +28,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
 
     public Gamepad MyControler;
     public CONTROLER controler;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         CamRotation();
         ZQSDMouvement();
         Run();
@@ -58,7 +60,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
         else
             rotationX -= MyControler.rightStick.ReadValue().y * 5f;
 
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        rotationX = Mathf.Clamp(rotationX,-30, 30);
         cam.transform.localRotation = Quaternion.Euler(rotationX * mouseSensiY, 0f, 0f);
     }
     //Fait rotater le joueur sur l'horizontale
@@ -77,23 +79,25 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     }
     private void Run()
     {
+        if(controler == CONTROLER.MANETTE)
+        {
+            if(_isRunning)
+                IncreaseSpeed();
+            else
+                DecreaseSpeed();
+        }
+
         if (Input.GetKey(KeyCode.LeftShift) && _isCrounch == false && controler == CONTROLER.CLAVIER)
         {
-            Debug.Log("cours 2 ");
             IncreaseSpeed();
             _isRunning = true;
         }
-        else if (MyControler != null && MyControler.leftStickButton.IsPressed() == true && _isCrounch == false && controler == CONTROLER.MANETTE)
+        else if (MyControler != null && MyControler.leftStickButton.IsPressed() == true && _isCrounch == false && controler == CONTROLER.MANETTE && timer > 0.2f)
         {
-            Debug.Log("cours");
-            IncreaseSpeed();
-            _isRunning = true;
+            _isRunning = !_isRunning;
+            timer = 0;
         }
-        else if (MyControler != null && controler == CONTROLER.MANETTE)
-        {
-            DecreaseSpeed();
-            _isRunning = false;
-        }
+
         if (Input.GetKeyUp(KeyCode.LeftShift) && controler == CONTROLER.CLAVIER)
         {
             DecreaseSpeed();
