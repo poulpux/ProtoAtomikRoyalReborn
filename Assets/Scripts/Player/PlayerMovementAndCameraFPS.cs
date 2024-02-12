@@ -60,8 +60,8 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
         else
             rotationX -= MyControler.rightStick.ReadValue().y * 5f;
 
-        rotationX = Mathf.Clamp(rotationX,-30, 30);
-        cam.transform.localRotation = Quaternion.Euler(rotationX * mouseSensiY, 0f, 0f);
+        rotationX = Mathf.Clamp(rotationX,-90, 90);
+        cam.transform.localRotation = Quaternion.Euler(rotationX , 0f, 0f);
     }
     //Fait rotater le joueur sur l'horizontale
     private void CamRotationY()

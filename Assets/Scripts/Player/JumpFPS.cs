@@ -24,7 +24,7 @@ public class JumpFPS : MonoBehaviour
     void Update()
     {
         allTimer();
-        if (Input.GetButtonDown("Jump") && CanJump() == true && config != null && config.MyControler != null && config.controler == CONTROLER.CLAVIER)
+        if (Input.GetButtonDown("Jump") && CanJump() == true  && config.controler == CONTROLER.CLAVIER)
             Jump();
         else if (config != null && config.MyControler != null && config.MyControler.buttonSouth.IsPressed() == true && CanJump() == true && config.controler == CONTROLER.MANETTE)
             Jump();
