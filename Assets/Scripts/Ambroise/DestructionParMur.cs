@@ -30,9 +30,12 @@ public class DestructionParMur : MonoBehaviour
     {
         if(childs.Count == 0)
             Destroy(gameObject, 15f);
-        //if(childs.Count < nbChild / 2 && rb.isKinematic)
-        //    rb.isKinematic = false;
-        
+        if (childs.Count < nbChild / 2 && rb.isKinematic)
+        {
+            Debug.Log("Gravity");
+            rb.isKinematic = false;
+        }
+
 
         foreach (var item in childs)
         {
