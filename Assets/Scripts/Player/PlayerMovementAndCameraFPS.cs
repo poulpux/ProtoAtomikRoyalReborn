@@ -77,16 +77,29 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     }
     private void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && _isCrounch == false)
+        if (Input.GetKey(KeyCode.LeftShift) && _isCrounch == false && controler == CONTROLER.CLAVIER)
         {
+            Debug.Log("cours 2 ");
             IncreaseSpeed();
             _isRunning = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (MyControler != null && MyControler.leftStickButton.IsPressed() == true && _isCrounch == false && controler == CONTROLER.MANETTE)
+        {
+            Debug.Log("cours");
+            IncreaseSpeed();
+            _isRunning = true;
+        }
+        else if (MyControler != null && controler == CONTROLER.MANETTE)
         {
             DecreaseSpeed();
             _isRunning = false;
         }
+        if (Input.GetKeyUp(KeyCode.LeftShift) && controler == CONTROLER.CLAVIER)
+        {
+            DecreaseSpeed();
+            _isRunning = false;
+        }
+
         if (_isCrounch == true)
             DecreaseSpeedWhileRun();
 

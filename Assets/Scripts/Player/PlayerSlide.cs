@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerCrounch))]
 public class PlayerSlide : MonoBehaviour
@@ -35,7 +37,11 @@ public class PlayerSlide : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.F) && _movementAndCameraFPS._isRunning == true && _stopSliding == false && verticalInput > 0)
+        if (Input.GetKeyDown(KeyCode.F) && _movementAndCameraFPS._isRunning == true && _stopSliding == false && verticalInput > 0 && _movementAndCameraFPS.controler == CONTROLER.CLAVIER)
+        {
+            StartSlide();
+        }
+        else if (_movementAndCameraFPS != null && _movementAndCameraFPS.MyControler != null && _movementAndCameraFPS.MyControler.rightStickButton.IsPressed() == true && _movementAndCameraFPS._isRunning == true && _stopSliding == false && verticalInput > 0)
         {
             StartSlide();
         }
