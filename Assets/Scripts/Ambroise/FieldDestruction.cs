@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FieldDestruction : MonoBehaviour
@@ -8,19 +9,54 @@ public class FieldDestruction : MonoBehaviour
     private List<GameObject> parentsField = new List<GameObject>();
     [SerializeField]
     private GameObject sourceObject;
+    List<GameObject> allChild = new List<GameObject>();
+
     void Start()
     {
-        SetField();
+        RecupChild();
+        FirstFilonAssign();
+        //SetField();
     }
 
     void Update()
     {
         
     }
+    private void FirstFilonAssign()
+    {
+        List<GameObject> list = allChild;
+        allChild[0].transform.SetParent(parentsField[0].transform);
+        allChild[0].GetComponent<PvEnviro>().isPassé = true; 
+        int nbTour = 0;
+        while (nbTour < 0 /*|| list.Count == 0*/)
+        {
+            List<GameObject> toRemove = new List<GameObject>();
+
+            foreach (var item in list)
+            {
+                PvEnviro connect = item.GetComponent<PvEnviro>();
+                foreach (var voisin in connect.listNeightBour)
+                {
+                    PvEnviro poto = voisin.GetComponent<PvEnviro>();
+                    if (poto.isPassé)
+                    {
+                        toRemove.Add(item);
+                        item.transform.SetParent(parentsField[0].transform);
+                        connect.isPassé = true;
+                    }
+                }
+            }
+            nbTour++;
+            foreach (var item in toRemove)
+            {
+                list.Remove(item);
+            }
+        }
+    }
 
     private void SetField()
     {
-        List<GameObject> allChild = new List<GameObject>();
+        allChild = new List<GameObject>();
         Transform[] allChildTrans = GetComponentsInChildren<Transform>();
         List<GameObject>ToCherchNeightBour = new List<GameObject>();
         foreach (Transform child in allChildTrans)
@@ -43,6 +79,21 @@ public class FieldDestruction : MonoBehaviour
         }
     }
 
+    private void RecupChild()
+    {
+        allChild = new List<GameObject>();
+        Transform[] allChildTrans = GetComponentsInChildren<Transform>();
+        List<GameObject> ToCherchNeightBour = new List<GameObject>();
+        foreach (Transform child in allChildTrans)
+        {
+            if(child.GetComponent<PvEnviro>()!=null)
+                allChild.Add(child.gameObject);
+        }
+        parentsField.Add(new GameObject());
+        parentsField[0].transform.SetParent(transform);
+        SortByDistance();
+    }
+
     private void RecupCollider(GameObject parent, GameObject objet)
     {
         objet.transform.SetParent(parent.transform);
@@ -51,25 +102,10 @@ public class FieldDestruction : MonoBehaviour
         parentCollider.center = objet.transform.localPosition;
     }
 
-    private void Instanciate(List<GameObject> allchild, List<GameObject> willScan)
+    private List<GameObject> SortByDistance()
     {
-        RecupCollider(parentsField[0], allchild[0]);
+        List<GameObject> sortedGameObjects = allChild.OrderBy(go => Vector3.Distance(go.transform.position, allChild[0].transform.position)).ToList();
 
-        Scan(allchild[0], allchild, parentsField[0], willScan);
-        allchild.Remove(allchild[0]);
-    }
-
-    private void Scan(GameObject objectToScan, List<GameObject> allChild, GameObject parent,List<GameObject> willScan)
-    {
-        Collider[] allCollider = Physics.OverlapBox(objectToScan.transform.position, objectToScan.transform.localScale);
-        foreach (Collider child in allCollider)
-        {
-            int index = allChild.FindIndex(index => index.gameObject == child.gameObject);
-            if (index != -1)
-            {
-                allChild[index].transform.SetParent(parent.transform);
-                willScan.Add(allChild[index]);
-            }
-        }
+        return sortedGameObjects;
     }
 }
