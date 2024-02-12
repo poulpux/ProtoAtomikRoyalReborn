@@ -26,9 +26,8 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     [HideInInspector] public Vector3 actualScale;
     [HideInInspector] public bool _isCrounch = false;
 
-    [SerializeField]
-    private bool Player2;
     public Gamepad MyControler;
+    public CONTROLER controler;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,18 +53,26 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     //On rotate la souris et on la bloque en vertical
     private void CamRotationX()
     {
-        rotationX -= Input.GetAxis("Mouse Y") * mouseSensiY;
+        if (controler == CONTROLER.CLAVIER)
+            rotationX -= Input.GetAxis("Mouse Y") * mouseSensiY;
+        else
+            rotationX -= MyControler.rightStick.ReadValue().y * 5f;
+
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-        cam.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        cam.transform.localRotation = Quaternion.Euler(rotationX * mouseSensiY, 0f, 0f);
     }
     //Fait rotater le joueur sur l'horizontale
     private void CamRotationY()
     {
-        transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensiX, 0f);
+        if(controler == CONTROLER.CLAVIER)
+            transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensiX, 0f);
+        else
+            transform.Rotate(0f, MyControler.rightStick.ReadValue().x * 5f * mouseSensiX, 0f);
+
     }
     private void ZQSDMouvement()
     {
-        Vector3 dir = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f);
+        Vector3 dir = controler == CONTROLER.CLAVIER ? Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f) : Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
         rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
     }
     private void Run()

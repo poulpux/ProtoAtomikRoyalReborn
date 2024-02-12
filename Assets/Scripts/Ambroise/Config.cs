@@ -8,6 +8,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.InputSystem.XInput;
 
+public enum CONTROLER
+{
+    MANETTE,
+    CLAVIER
+}
+
 public enum CONFIG
 {
     DEUXMANETTEES,
@@ -19,7 +25,7 @@ public class Config : MonoBehaviour
 
     public CONFIG config;
     Gamepad[] gamepads;
-    [SerializeField] private MoovementFPS[] playerTab;
+    [SerializeField] private PlayerMovementAndCameraFPS[] playerTab;
     private int saveNbControl;
     private int ManetteJ1;
     // Start is called before the first frame update
@@ -27,10 +33,10 @@ public class Config : MonoBehaviour
     {
 
         ManetteJ1 = PlayerPrefs.GetInt("ControleScreen");
-
+        ManetteJ1 = 1;
         UpdateGamepadList();
 
-        if (PlayerPrefs.GetInt("ControleCtrl") == 0)
+        if (PlayerPrefs.GetInt("ControleCtrl") == 1)
             config = CONFIG.DEUXMANETTEES;
         else
             config = CONFIG.UNCLAVIERUNEMANETTE;

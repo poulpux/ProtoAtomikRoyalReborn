@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 [RequireComponent(typeof(Rigidbody))]
 public class JumpFPS : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class JumpFPS : MonoBehaviour
     [Space(10)]
     [SerializeField] private float jumpPow = 5f;
     Rigidbody rb;
+    [SerializeField]
+    private PlayerMovementAndCameraFPS config;
     [TextArea]
     public string AboutTool = "Attention : Mettre la layer (Player) au Player. \nFonction de saut opti, detection du sol grace a un raycasting aux pied du personnage. ";
     float timerJump;
@@ -20,8 +24,10 @@ public class JumpFPS : MonoBehaviour
     void Update()
     {
         allTimer();
-        if (Input.GetButtonDown("Jump") && CanJump() == true)
+        if (Input.GetButtonDown("Jump") && CanJump() == true && config.controler == CONTROLER.CLAVIER)
             Jump();
+        //else if (config.MyControler.buttonSouth.IsPressed() == true && CanJump() == true && config.controler == CONTROLER.MANETTE)
+        //    Jump();
     }
     private void allTimer()
     {
