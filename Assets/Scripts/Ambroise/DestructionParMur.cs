@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Rigidbody))]
 public class DestructionParMur : MonoBehaviour
 {
+    private Rigidbody rb;
     [SerializeField]
     private List< GameObject> childs = new List<GameObject>();
+    private int nbChild;
 
     [HideInInspector]
     public UnityEvent<GameObject> DestroyColliderEvent = new UnityEvent<GameObject>();
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>(); 
         CombineChildBoxColliders();
-
+        nbChild = childs.Count;
         DestroyColliderEvent.AddListener((objet) => { childs.Remove(objet); RemoveBoxCollidersFromChildren(); CombineChildBoxColliders(); });
     }
 
@@ -24,6 +28,12 @@ public class DestructionParMur : MonoBehaviour
 
     void CombineChildBoxColliders()
     {
+        if(childs.Count == 0)
+            Destroy(gameObject, 15f);
+        if(childs.Count < nbChild / 2 && rb.isKinematic)
+            rb.isKinematic = false;
+        
+
         foreach (var item in childs)
         {
             BoxCollider parentCollider = gameObject.AddComponent<BoxCollider>();
@@ -42,7 +52,6 @@ public class DestructionParMur : MonoBehaviour
             return;
         }
 
-        // Supprimer tous les Box Colliders des enfants
         foreach (BoxCollider childCollider in childColliders)
         {
             Destroy(childCollider);
