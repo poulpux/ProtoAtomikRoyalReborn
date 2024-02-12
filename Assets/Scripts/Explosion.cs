@@ -38,7 +38,8 @@ public class Explosion : MonoBehaviour
         //Manequin manequin = collider.GetComponent<Manequin>();
         if (other != null)
         {
-            other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
+            if(other.tag != "Mur")
+                other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
             if (other.gameObject.tag == "Fragment")
                 other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
             //if (other.gameObject != manequin)

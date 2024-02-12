@@ -12,7 +12,7 @@ public class FieldDestruction : MonoBehaviour
     private GameObject parentPrefab;
 
     private List<GameObject> parentsField = new List<GameObject>();
-    List<GameObject> allChild = new List<GameObject>();
+    public List<GameObject> allChild = new List<GameObject>();
 
     [SerializeField]
     private bool OnStart;
@@ -32,6 +32,13 @@ public class FieldDestruction : MonoBehaviour
     {
         
     }
+
+    //public void ReFaitTout()
+    //{
+    //    RecupChild();
+    //    List<GameObject> list = allChild;
+    //    FirstFilonAssign(list, 0);
+    //}
 
     private void FirstFilonAssign(List<GameObject> list, int nb)
     {
@@ -69,47 +76,22 @@ public class FieldDestruction : MonoBehaviour
             }
         }
 
-
-
         List<GameObject> allChilds = new List<GameObject>();
         Transform[] allChildTrans = parentsField[nb].GetComponentsInChildren<Transform>();
         List<GameObject> ToCherchNeightBour = new List<GameObject>();
         foreach (Transform child in allChildTrans)
         {
             if (child.GetComponent<PvEnviro>() != null)
+            {
                 allChilds.Add(child.gameObject);
+                child.GetComponent<PvEnviro>().parent = parentsField[nb].GetComponent<DestructionParMur>();
+                child.GetComponent<PvEnviro>().FieldParent = this;
+            }
         }
         parentsField[nb].GetComponent<DestructionParMur>().childs = allChilds;
 
         if (list.Count > 0)
             FirstFilonAssign(list, nb+1);
-    }
-
-
-
-    private void SetField()
-    {
-        allChild = new List<GameObject>();
-        Transform[] allChildTrans = GetComponentsInChildren<Transform>();
-        List<GameObject>ToCherchNeightBour = new List<GameObject>();
-        foreach (Transform child in allChildTrans)
-        {
-            allChild.Add(child.gameObject);
-        }
-        parentsField.Add(new GameObject());
-        parentsField[0].transform.SetParent(transform);
-
-        //Instanciate(allChild, ToCherchNeightBour);
-
-        //Scan(sourceObject);
-
-        foreach (var item in allChild)
-        {
-            item.transform.SetParent(parentsField[0].transform);
-            BoxCollider parentCollider = parentsField[0].AddComponent<BoxCollider>();
-            parentCollider.size = item.transform.localScale;
-            parentCollider.center = item.transform.localPosition;
-        }
     }
 
     private void RecupChild()
@@ -119,18 +101,12 @@ public class FieldDestruction : MonoBehaviour
         List<GameObject> ToCherchNeightBour = new List<GameObject>();
         foreach (Transform child in allChildTrans)
         {
-            if(child.GetComponent<PvEnviro>()!=null)
+            if (child.GetComponent<PvEnviro>() != null)
+            {
                 allChild.Add(child.gameObject);
+            }
         }
         SortByDistance();
-    }
-
-    private void RecupCollider(GameObject parent, GameObject objet)
-    {
-        objet.transform.SetParent(parent.transform);
-        BoxCollider parentCollider = parent.AddComponent<BoxCollider>();
-        parentCollider.size = objet.transform.localScale;
-        parentCollider.center = objet.transform.localPosition;
     }
 
     private List<GameObject> SortByDistance()

@@ -20,6 +20,7 @@ public class ToolExplosion : MonoBehaviour
             foreach (var item in listChildren)
             {
                 item.tag = "Fragment";
+                item.gameObject.layer = 10;
             }
             if (destroyFragment)
             {

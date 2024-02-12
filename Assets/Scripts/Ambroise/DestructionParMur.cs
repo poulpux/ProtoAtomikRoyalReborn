@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class DestructionParMur : MonoBehaviour
 {
     private Rigidbody rb;
+    [HideInInspector]
     public List< GameObject> childs = new List<GameObject>();
     private int nbChild;
 
@@ -31,7 +32,6 @@ public class DestructionParMur : MonoBehaviour
             Destroy(gameObject, 15f);
         if (childs.Count < nbChild / 2 && rb.isKinematic)
         {
-            Debug.Log("Gravity");
             rb.isKinematic = false;
         }
 

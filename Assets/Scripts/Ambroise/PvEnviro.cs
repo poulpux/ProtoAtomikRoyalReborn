@@ -21,8 +21,8 @@ public class PvEnviro : MonoBehaviour
     [SerializeField]
     private bool GetNeightbour;
 
-    [SerializeField]
-    DestructionParMur parent;
+    public DestructionParMur parent;
+    public FieldDestruction FieldParent;
     private int hp;
     private Rigidbody rb;
     void Awake()
@@ -42,6 +42,8 @@ public class PvEnviro : MonoBehaviour
         {
             if(parent != null) 
                 parent.DestroyColliderEvent.Invoke(gameObject);
+            //if (FieldParent != null)
+            //    FieldParent.ReFaitTout();
             rb.isKinematic = false;
             ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement, timeToDestruct);
         }
