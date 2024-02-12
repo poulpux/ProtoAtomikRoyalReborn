@@ -1,34 +1,49 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class FieldDestruction : MonoBehaviour
 {
-    private List<GameObject> parentsField = new List<GameObject>();
     [SerializeField]
-    private GameObject sourceObject;
+    private GameObject parentPrefab;
+
+    private List<GameObject> parentsField = new List<GameObject>();
     List<GameObject> allChild = new List<GameObject>();
+
+    [SerializeField]
+    private bool OnStart;
 
     void Start()
     {
-        RecupChild();
-        FirstFilonAssign();
-        //SetField();
+        if (OnStart)
+        {
+            RecupChild();
+            List<GameObject> list = allChild;
+            FirstFilonAssign(list, 0);
+            //SetField();
+        }
     }
 
     void Update()
     {
         
     }
-    private void FirstFilonAssign()
+
+    private void FirstFilonAssign(List<GameObject> list, int nb)
     {
-        List<GameObject> list = allChild;
-        allChild[0].transform.SetParent(parentsField[0].transform);
-        allChild[0].GetComponent<PvEnviro>().isPassé = true; 
+        GameObject a = Instantiate(parentPrefab);
+        parentsField.Add(a);
+        parentsField[nb].transform.SetParent(transform);
+        allChild[0].transform.SetParent(parentsField[nb].transform);
+        //RecupCollider(parentsField[nb], allChild[0]);
+        allChild[0].GetComponent<PvEnviro>().isPassé = true;
+        list.Remove(allChild[0]);
         int nbTour = 0;
-        while (nbTour < 0 /*|| list.Count == 0*/)
+        while (nbTour < 10 /*|| list.Count == 0*/)
         {
             List<GameObject> toRemove = new List<GameObject>();
 
@@ -41,7 +56,8 @@ public class FieldDestruction : MonoBehaviour
                     if (poto.isPassé)
                     {
                         toRemove.Add(item);
-                        item.transform.SetParent(parentsField[0].transform);
+                        item.transform.SetParent(parentsField[nb].transform);
+                        //RecupCollider(parentsField[nb], item);
                         connect.isPassé = true;
                     }
                 }
@@ -52,7 +68,24 @@ public class FieldDestruction : MonoBehaviour
                 list.Remove(item);
             }
         }
+
+
+
+        List<GameObject> allChilds = new List<GameObject>();
+        Transform[] allChildTrans = parentsField[nb].GetComponentsInChildren<Transform>();
+        List<GameObject> ToCherchNeightBour = new List<GameObject>();
+        foreach (Transform child in allChildTrans)
+        {
+            if (child.GetComponent<PvEnviro>() != null)
+                allChilds.Add(child.gameObject);
+        }
+        parentsField[nb].GetComponent<DestructionParMur>().childs = allChilds;
+
+        if (list.Count > 0)
+            FirstFilonAssign(list, nb+1);
     }
+
+
 
     private void SetField()
     {
@@ -89,8 +122,6 @@ public class FieldDestruction : MonoBehaviour
             if(child.GetComponent<PvEnviro>()!=null)
                 allChild.Add(child.gameObject);
         }
-        parentsField.Add(new GameObject());
-        parentsField[0].transform.SetParent(transform);
         SortByDistance();
     }
 

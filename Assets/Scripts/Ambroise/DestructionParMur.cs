@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class DestructionParMur : MonoBehaviour
 {
     private Rigidbody rb;
-    [SerializeField]
-    private List< GameObject> childs = new List<GameObject>();
+    public List< GameObject> childs = new List<GameObject>();
     private int nbChild;
 
     [HideInInspector]

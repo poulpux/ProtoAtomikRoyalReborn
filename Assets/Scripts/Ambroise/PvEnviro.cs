@@ -74,7 +74,7 @@ public class PvEnviro : MonoBehaviour
         for (int i = 0; i < ray.Length; i++)
         {
             float longueur = i <= 1 ? transform.localScale.z : i <= 3 ? transform.localScale.y : transform.localScale.x ; 
-            if (Physics.Raycast(ray[i], out hit, longueur + 1f, (1 << LayerMask.NameToLayer("Stuctures"))))
+            if (Physics.Raycast(ray[i], out hit, longueur + 0.2f, (1 << LayerMask.NameToLayer("Stuctures"))))
             {
                 if(hit.collider.tag == "Mur")
                     listNeightBour.Add(hit.collider.gameObject);
