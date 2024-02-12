@@ -25,6 +25,10 @@ public class Manequin : MonoBehaviour
     public void TakeDamage(int _damage)
     {
         _pv -= _damage;
+        if(_pv <= 0 )
+        {
+            _pv = 0;
+        }
     }
 
     private void Dead()

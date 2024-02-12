@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIScript : MonoBehaviour
 {
-    [SerializeField] private Image _imageTimerDash;
-    [SerializeField] PlayerSlide _playerSlide;
+    [SerializeField] PlayerStat _playerStat;
+    [SerializeField] Image _imageHealthBarGreen;
+    [SerializeField] private TMP_Text _textHealth;
 
     void Start()
     {
-        
+        _textHealth.text = _playerStat._pv.ToString();
     }
 
-    void Update()
+    public void UpdateViewHealthBarGreen()
     {
-        
-    }
-
-    public void UpdateViewTimerDash()
-    {
-        _imageTimerDash.fillAmount = _playerSlide._timerCanDash / _playerSlide._timerCanDashSAVE;
+        _textHealth.text = "" + _playerStat._pv;
+        _imageHealthBarGreen.fillAmount = _playerStat._pv / _playerStat._pvSAVE;
     }
 }
