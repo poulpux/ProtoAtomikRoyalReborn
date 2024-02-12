@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementAndCameraFPS : MonoBehaviour
@@ -24,6 +25,10 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     [HideInInspector] public Vector3 crounchScale;
     [HideInInspector] public Vector3 actualScale;
     [HideInInspector] public bool _isCrounch = false;
+
+    [SerializeField]
+    private bool Player2;
+    public Gamepad MyControler;
     // Start is called before the first frame update
     void Start()
     {
