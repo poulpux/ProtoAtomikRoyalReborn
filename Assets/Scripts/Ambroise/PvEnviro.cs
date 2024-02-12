@@ -31,7 +31,8 @@ public class PvEnviro : MonoBehaviour
         hp -= explo.damage;
         if (IsDead() && isDestroyable)
         {
-            parent.DestroyColliderEvent.Invoke(gameObject);
+            if(parent != null) { }
+                parent.DestroyColliderEvent.Invoke(gameObject);
             rb.isKinematic = false;
             ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement, timeToDestruct);
         }
