@@ -35,11 +35,17 @@ public class Explosion : MonoBehaviour
     private void PousseObjects(Collider collider)
     {
         Rigidbody other = collider.GetComponent<Rigidbody>();
+        //Manequin manequin = collider.GetComponent<Manequin>();
         if (other != null)
         {
             other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
             if (other.gameObject.tag == "Fragment")
                 other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+            //if (other.gameObject != manequin)
+            //{
+            //    other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+            //    manequin.TakeDamage(50);
+            //}
         }
     }
 
