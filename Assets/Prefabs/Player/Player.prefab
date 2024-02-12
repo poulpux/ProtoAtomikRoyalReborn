@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5778e732b092a4cb7f2205b81b113d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPow: 700
+  jumpPow: 500
   AboutTool: "Attention : Mettre la layer (Player) au Player. \nFonction de saut
     opti, detection du sol grace a un raycasting aux pied du personnage. "
 --- !u!114 &1047863495760492769
@@ -202,6 +202,7 @@ MonoBehaviour:
   _grenadePrefab: {fileID: 8433283994375064560, guid: c8238286153cd1c4794894ef877a5ecd, type: 3}
   _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
   _throwForce: 30
+  mine: 1
 --- !u!114 &5414318120052967593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovementAndCameraFPS: {fileID: 1776049372590630128}
+  needToGoUP: 0
 --- !u!114 &1389234298885238022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f794939be23e6374695d1e8372f083d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAttrape: 3
+  distanceAttrape: 2
   timeToGrimpe: 0.5
 --- !u!1 &9096226407825735963
 GameObject:
@@ -273,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 9096226407825735963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: 0.24}
+  m_LocalPosition: {x: 0, y: 0.53, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

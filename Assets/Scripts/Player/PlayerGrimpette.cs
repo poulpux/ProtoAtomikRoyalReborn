@@ -39,22 +39,38 @@ public class PlayerGrimpette : MonoBehaviour
 
     private Vector3 FindPosGrimpette()
     {
-        Ray ray = new Ray(transform.position - Vector3.up * 0.5f, transform.forward);
-        RaycastHit hit;
+        Ray ray1 = new Ray(transform.position - Vector3.up * 0.5f, transform.forward);
+        Ray ray2 = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
+        Ray ray3 = new Ray(transform.position , transform.forward);
 
-        if (Physics.Raycast(ray, out hit, distanceAttrape))
+        Vector3 result1 = ThrowRaycast(ray1);
+        if (result1 != Vector3.zero)
+            return result1;
+        Vector3 result2 = ThrowRaycast(ray2);
+        if (result2 != Vector3.zero)
+            return result2;
+        Vector3 result3 = ThrowRaycast(ray3);
+        if (result3 != Vector3.zero)
+            return result3;
+
+        return Vector3.zero;
+    }
+
+    private Vector3 ThrowRaycast(Ray ray)
+    {
+        if (Physics.Raycast(ray, out RaycastHit hit, distanceAttrape))
         {
-            if (hit.distance <= distanceAttrape)
-            {
-                Quaternion rotationY = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-                Vector3 rayDirection = rotationY * Vector3.forward;
-                Vector3 rayOrigin = transform.position +(hit.distance + 0.1f) * rayDirection + Vector3.up * 1.2f;
+            Quaternion rotationY = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            Vector3 rayDirection = rotationY * Vector3.forward;
+            Vector3 rayOrigin = transform.position + (hit.distance + 0.1f) * rayDirection + Vector3.up * 1.2f;
 
-                Ray ray2 = new Ray(rayOrigin, -transform.up);
-                if (Physics.Raycast(ray2, out RaycastHit hit2, 2.5f))
-                    return rayOrigin;
-                else
-                    return Vector3.zero;
+            Ray ray2 = new Ray(rayOrigin, -transform.up);
+            if (Physics.Raycast(ray2, out RaycastHit hit2, 2.5f))
+            {
+                Ray ray3 = new Ray(transform.position, transform.up);
+                Ray ray4 = new Ray(transform.position + transform.forward, transform.up);
+                if (!Physics.Raycast(ray3, out RaycastHit hit3, 3) && !Physics.Raycast(ray4, out RaycastHit hit4, 3))
+                    return rayOrigin + Vector3.up * (hit2.distance + 0.4f);
             }
         }
         return Vector3.zero;

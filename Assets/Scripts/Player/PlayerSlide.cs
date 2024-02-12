@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerCrounch))]
 public class PlayerSlide : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
@@ -16,9 +17,11 @@ public class PlayerSlide : MonoBehaviour
     private bool _canCalculTimer = false;
     private bool _canDash = true;
     private UIScript uIScript;
+    private PlayerCrounch crouch;
 
     private void Start()
     {
+        crouch = GetComponent<PlayerCrounch>();
         uIScript = FindAnyObjectByType<UIScript>();
     }
     void Update()
@@ -75,14 +78,18 @@ public class PlayerSlide : MonoBehaviour
         _canCalculTimer = true;
         _stopSliding = false;
         _sliding = false;
-        transform.localScale = _movementAndCameraFPS.actualScale;
+        Ray ray = new Ray(transform.position, transform.up);
+        if (!Physics.Raycast(ray, out RaycastHit hit, 0.55f))
+            transform.localScale = _movementAndCameraFPS.actualScale;
+        else
+            crouch.needToGoUP = true;
     }
 
     private void CalculTimerCanDash()
     {
         if (_canCalculTimer == true)
         {
-            uIScript.UpdateViewTimerDash();
+            //uIScript.UpdateViewTimerDash();
             _timerCanDash += Time.deltaTime;
             if (_timerCanDash >= _timerCanDashSAVE)
             {
