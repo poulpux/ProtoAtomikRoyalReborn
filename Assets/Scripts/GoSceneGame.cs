@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class GoSceneGame : MonoBehaviour
 {
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Game1Player");
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
