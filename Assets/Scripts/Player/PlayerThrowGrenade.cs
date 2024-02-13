@@ -12,8 +12,9 @@ public class PlayerThr : MonoBehaviour
     [SerializeField] private Grenade _grenadePrefab;
     [SerializeField] private Mine _mine;
     [SerializeField] private float _throwForce;
-    [HideInInspector]
-    public bool mine = true;
+    [HideInInspector] public bool mine = true;
+    [SerializeField] private LayerMask _hit;
+    [SerializeField] private float _distancePauseMine;
 
     private float timer;
 
@@ -42,7 +43,11 @@ public class PlayerThr : MonoBehaviour
             }
             if (player.MyControler != null && player.MyControler.leftTrigger.IsPressed() == true && mine && timer > 0.2f)
             {
-                Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
+                Ray ray = new Ray(_Camera.transform.position, _Camera.transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, _distancePauseMine, _hit))
+            {
+                Mine mine = Instantiate(_mine, hit.point, Quaternion.LookRotation(hit.normal));                
+            }
                 timer = 0f;
             }
         }
