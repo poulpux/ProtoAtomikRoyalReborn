@@ -25,9 +25,8 @@ public class Explosion : MonoBehaviour
     private void ExploRange()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radiusExplosion);
-
         foreach (Collider collider in colliders)
-        {                         
+        {
             ExploseOtherMines(collider);
             PousseObjects(collider);
         }
@@ -36,18 +35,18 @@ public class Explosion : MonoBehaviour
     private void PousseObjects(Collider collider)
     {
         Rigidbody other = collider.GetComponent<Rigidbody>();
+        //Manequin manequin = collider.GetComponent<Manequin>();
         if (other != null)
         {
             if(other.tag != "Mur")
                 other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
             if (other.gameObject.tag == "Fragment")
-                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);            
-        }
-
-        PlayerStat playerStat = collider.GetComponent<PlayerStat>();
-        if (playerStat != null)
-        {
-            playerStat.TakeDamage(50);
+                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+            //if (other.gameObject != manequin)
+            //{
+            //    other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+            //    manequin.TakeDamage(50);
+            //}
         }
     }
 

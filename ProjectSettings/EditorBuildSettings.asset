@@ -11,8 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneAmbroise.unity
     guid: 550fe0fd0c943694cb52a61b65b88603
-  - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 647c6f82a3371894cb5cc7cf67b7d449
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
