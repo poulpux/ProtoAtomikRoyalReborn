@@ -74,8 +74,18 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     }
     private void ZQSDMouvement()
     {
-        Vector3 dir = controler == CONTROLER.CLAVIER ? Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f) : Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
-        rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
+        if (controler == CONTROLER.CLAVIER)
+        {
+            Vector3 dir = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f);
+            rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
+        }
+        if(controler == CONTROLER.MANETTE)
+        {
+            Vector3 dir = Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
+            rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
+        }
+            //Vector3 dir = controler == CONTROLER.CLAVIER ? Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f) : Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
+        //rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
     }
     private void Run()
     {
