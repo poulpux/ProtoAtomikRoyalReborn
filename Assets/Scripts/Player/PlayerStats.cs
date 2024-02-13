@@ -19,12 +19,12 @@ public class PlayerStats : MonoBehaviour
         if(_pv <= 0f)
         {
             Death();
-            _pv = 0f;
         }
     }
 
     public void Death()
     {
+        _pv = 0f;
         transform.position = new Vector3(_playerPosSpawn.position.x, _playerPosSpawn.position.y, _playerPosSpawn.position.z);
         _pv = _pvSAVE;
     }
