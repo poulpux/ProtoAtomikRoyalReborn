@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementAndCameraFPS : MonoBehaviour
@@ -24,6 +25,10 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     [HideInInspector] public Vector3 crounchScale;
     [HideInInspector] public Vector3 actualScale;
     [HideInInspector] public bool _isCrounch = false;
+
+    public Gamepad MyControler;
+    public CONTROLER controler;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +41,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         CamRotation();
         ZQSDMouvement();
         Run();
@@ -49,32 +55,55 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     //On rotate la souris et on la bloque en vertical
     private void CamRotationX()
     {
-        rotationX -= Input.GetAxis("Mouse Y") * mouseSensiY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-        cam.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        if (controler == CONTROLER.CLAVIER)
+            rotationX -= Input.GetAxis("Mouse Y") * mouseSensiY;
+        else
+            rotationX -= MyControler.rightStick.ReadValue().y * 5f;
+
+        rotationX = Mathf.Clamp(rotationX,-90, 90);
+        cam.transform.localRotation = Quaternion.Euler(rotationX , 0f, 0f);
     }
     //Fait rotater le joueur sur l'horizontale
     private void CamRotationY()
     {
-        transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensiX, 0f);
+        if(controler == CONTROLER.CLAVIER)
+            transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensiX, 0f);
+        else
+            transform.Rotate(0f, MyControler.rightStick.ReadValue().x * 5f * mouseSensiX, 0f);
+
     }
     private void ZQSDMouvement()
     {
-        Vector3 dir = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f);
+        Vector3 dir = controler == CONTROLER.CLAVIER ? Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f) : Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
         rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
     }
     private void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && _isCrounch == false)
+        if(controler == CONTROLER.MANETTE)
+        {
+            if(_isRunning)
+                IncreaseSpeed();
+            else
+                DecreaseSpeed();
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && _isCrounch == false && controler == CONTROLER.CLAVIER)
         {
             IncreaseSpeed();
             _isRunning = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (MyControler != null && MyControler.leftStickButton.IsPressed() == true && _isCrounch == false && controler == CONTROLER.MANETTE && timer > 0.2f)
+        {
+            _isRunning = !_isRunning;
+            timer = 0;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift) && controler == CONTROLER.CLAVIER)
         {
             DecreaseSpeed();
             _isRunning = false;
         }
+
         if (_isCrounch == true)
             DecreaseSpeedWhileRun();
 
