@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,23 +8,37 @@ using UnityEngine.Events;
 public class DestructionParMur : MonoBehaviour
 {
     private Rigidbody rb;
-    [HideInInspector]
     public List< GameObject> childs = new List<GameObject>();
+    public List< Collider> childsColliders = new List<Collider>();
     private int nbChild;
 
     [HideInInspector]
     public UnityEvent<GameObject> DestroyColliderEvent = new UnityEvent<GameObject>();
 
+    private bool firstUpdate;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); 
-        CombineChildBoxColliders();
-        nbChild = childs.Count;
-        DestroyColliderEvent.AddListener((objet) => { childs.Remove(objet); RemoveBoxCollidersFromChildren(); CombineChildBoxColliders(); });
     }
 
     void Update()
     {
+        if (!firstUpdate)
+        {
+            rb = GetComponent<Rigidbody>();
+            CombineChildBoxColliders();
+            nbChild = childs.Count;
+            DestroyColliderEvent.AddListener((objet) => AccurencyDestroyCollider(objet));
+            firstUpdate = true;
+        }
+    }
+
+    private void AccurencyDestroyCollider(GameObject toDestroy)
+    {
+        int index = childs.FindIndex(objet => objet.gameObject == toDestroy);
+        childs.RemoveAt(index);
+        Destroy(childsColliders[index]);
+        childsColliders.RemoveAt(index);
     }
 
     void CombineChildBoxColliders()
@@ -41,6 +56,7 @@ public class DestructionParMur : MonoBehaviour
             BoxCollider parentCollider = gameObject.AddComponent<BoxCollider>();
             parentCollider.size = item.transform.localScale;
             parentCollider.center = item.transform.localPosition;
+            childsColliders.Add(parentCollider);
         }
     }
 

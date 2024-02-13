@@ -22,9 +22,10 @@ public class PvEnviro : MonoBehaviour
     private bool GetNeightbour;
 
     public DestructionParMur parent;
-    public FieldDestruction FieldParent;
     private int hp;
     private Rigidbody rb;
+
+        public FieldDestruction FieldParent;
     void Awake()
     {
         hp = maxHp;
@@ -40,10 +41,10 @@ public class PvEnviro : MonoBehaviour
         hp -= explo.damage;
         if (IsDead() && isDestroyable)
         {
-            if(parent != null) 
+            if (parent != null)
                 parent.DestroyColliderEvent.Invoke(gameObject);
-            //if (FieldParent != null)
-            //    FieldParent.ReFaitTout();
+            if (FieldParent != null)
+                FieldParent.ActiveTimer();
             rb.isKinematic = false;
             ToolExplosion.BrokeObject(gameObject, explo.transform, explo._forceExplosion, CleanFragement, timeToDestruct);
         }

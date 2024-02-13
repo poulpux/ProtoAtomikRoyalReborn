@@ -19,7 +19,7 @@ public class Explosion : MonoBehaviour
     private void OnDestroy()
     {
         Explose();
-        ExploRange();
+        //ExploRange();
     }
 
     private void ExploRange()
