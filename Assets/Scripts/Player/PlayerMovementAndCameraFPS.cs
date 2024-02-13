@@ -69,7 +69,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
         if(controler == CONTROLER.CLAVIER)
             transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensiX, 0f);
         else
-            transform.Rotate(0f, MyControler.rightStick.ReadValue().x * 5f * mouseSensiX, 0f);
+            transform.Rotate(0f, MyControler.rightStick.ReadValue().x * 1.25f * mouseSensiX, 0f);
 
     }
     private void ZQSDMouvement()

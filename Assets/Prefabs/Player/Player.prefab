@@ -171,6 +171,7 @@ MonoBehaviour:
   crounchScale: {x: 0, y: 0, z: 0}
   actualScale: {x: 0, y: 0, z: 0}
   _isCrounch: 0
+  controler: 1
 --- !u!114 &3654310295203020233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPow: 500
+  config: {fileID: 0}
   AboutTool: "Attention : Mettre la layer (Player) au Player. \nFonction de saut
     opti, detection du sol grace a un raycasting aux pied du personnage. "
 --- !u!114 &1047863495760492769
@@ -198,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c39e5a917682b040b18d67fc5c040d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   _Camera: {fileID: 784421028810189147}
   _grenadePrefab: {fileID: 8433283994375064560, guid: c8238286153cd1c4794894ef877a5ecd, type: 3}
   _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
@@ -248,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceAttrape: 2
   timeToGrimpe: 0.5
+  config: {fileID: 0}
 --- !u!1 &9096226407825735963
 GameObject:
   m_ObjectHideFlags: 0
