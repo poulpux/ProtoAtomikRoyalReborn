@@ -67,8 +67,8 @@ public class MancheManager : MonoBehaviour
     private void Victory(bool player1)
     {
         if (player1)
-            winTxt.text = "Player 1 Victory !!!";
-        else
             winTxt.text = "Player 2 Victory !!!";
+        else
+            winTxt.text = "Player 1 Victory !!!";
     }
 }
