@@ -25,7 +25,7 @@ public class PvEnviro : MonoBehaviour
     private int hp;
     private Rigidbody rb;
 
-        public FieldDestruction FieldParent;
+    public FieldDestruction FieldParent;
     void Awake()
     {
         hp = maxHp;
@@ -33,8 +33,6 @@ public class PvEnviro : MonoBehaviour
         if (GetNeightbour)
             getAllNeightbour();
     }
-
-    
 
     public void GetExplose(Explosion explo)
     {
@@ -65,21 +63,21 @@ public class PvEnviro : MonoBehaviour
         Vector3 forward = transform.forward;
         Vector3 position = transform.position;
 
-        ray[0] = new Ray(transform.position  , transform.forward);
-        ray[1] = new Ray(transform.position  , -transform.forward);
-        ray[2] = new Ray(transform.position  , transform.up);
-        ray[3] = new Ray(transform.position  , -transform.up);
-        ray[4] = new Ray(transform.position  , transform.right);
-        ray[5] = new Ray(transform.position  , -transform.right);
+        ray[0] = new Ray(transform.position, transform.forward);
+        ray[1] = new Ray(transform.position, -transform.forward);
+        ray[2] = new Ray(transform.position, transform.up);
+        ray[3] = new Ray(transform.position, -transform.up);
+        ray[4] = new Ray(transform.position, transform.right);
+        ray[5] = new Ray(transform.position, -transform.right);
 
         RaycastHit hit;
 
         for (int i = 0; i < ray.Length; i++)
         {
-            float longueur = i <= 1 ? transform.localScale.z : i <= 3 ? transform.localScale.y : transform.localScale.x ; 
+            float longueur = i <= 1 ? transform.localScale.z : i <= 3 ? transform.localScale.y : transform.localScale.x;
             if (Physics.Raycast(ray[i], out hit, longueur + 0.2f, (1 << LayerMask.NameToLayer("Stuctures"))))
             {
-                if(hit.collider.tag == "Mur")
+                if (hit.collider.tag == "Mur")
                     listNeightBour.Add(hit.collider.gameObject);
             }
         }
