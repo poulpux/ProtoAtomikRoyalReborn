@@ -151,6 +151,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   _explosion: {fileID: 5014017034759109011, guid: 707585fb51e90d14bb573e7a8cce9b41, type: 3}
-  forceExplosion: 0
-  radiusExplosion: 3
+  forceExplosion: 8000
+  radiusExplosion: 2
   damage: 5

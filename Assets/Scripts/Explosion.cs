@@ -42,6 +42,14 @@ public class Explosion : MonoBehaviour
                 other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
             if (other.gameObject.tag == "Fragment")
                 other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+            if(other.gameObject.tag == "Player")
+            {
+                CooldownBomb life = other.GetComponent<CooldownBomb>();
+                if(life != null)
+                {
+                    life.hp -= 20;
+                }
+            }
             //if (other.gameObject != manequin)
             //{
             //    other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
