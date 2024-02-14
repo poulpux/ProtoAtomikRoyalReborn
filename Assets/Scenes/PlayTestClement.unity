@@ -1278,6 +1278,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4895204162318089460, guid: b918d65b23245c841b7aa3baaefa652c, type: 3}
+      propertyPath: controler
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5191810869742122242, guid: b918d65b23245c841b7aa3baaefa652c, type: 3}
       propertyPath: _slidingForce
       value: 10000
@@ -1856,6 +1860,10 @@ PrefabInstance:
     - target: {fileID: 3670259155550992585, guid: 2ae6a3322d6bc0145b3c1d534d2c2d40, type: 3}
       propertyPath: _uiscript
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307818345979788739, guid: 2ae6a3322d6bc0145b3c1d534d2c2d40, type: 3}
+      propertyPath: controler
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4307818345979788739, guid: 2ae6a3322d6bc0145b3c1d534d2c2d40, type: 3}
       propertyPath: mouseSensiX
