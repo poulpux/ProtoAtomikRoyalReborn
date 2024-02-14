@@ -8,6 +8,7 @@ TagManager:
   - Mine
   - Fragment
   - Mur
+  - Props
   layers:
   - Default
   - TransparentFX
@@ -20,11 +21,11 @@ TagManager:
   - Player
   - Stuctures
   - Fragment
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player1
+  - Player2
+  - Props
+  - MapLimit
+  - LightProps
   - 
   - 
   - 

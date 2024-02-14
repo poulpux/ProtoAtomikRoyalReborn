@@ -49,8 +49,10 @@ public class CooldownBomb : MonoBehaviour
 
     void Update()
     {
-        timerBomb += Time.deltaTime;
-        timerMine += Time.deltaTime;
+        if(nbBomb < nbMaxBomb)
+            timerBomb += Time.deltaTime;
+        if(nbMine < nbMaxMine)
+            timerMine += Time.deltaTime;
 
         if(timerBomb > cooldownBomb && nbBomb < nbMaxBomb && hp > 0)
         {

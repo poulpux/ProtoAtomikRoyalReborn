@@ -13,6 +13,7 @@ public class Explosion : MonoBehaviour
     void Start()
     {
         GameObject particule = Instantiate(_particulePrefab, transform.position, Quaternion.identity);
+        particule.transform.localScale = new Vector3(_radiusExplosion*2f,_radiusExplosion*2f,_radiusExplosion*2f);
         Destroy(this.gameObject);
     }
 
@@ -39,9 +40,11 @@ public class Explosion : MonoBehaviour
         if (other != null)
         {
             if(other.tag != "Mur")
-                other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
+                other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion*1.3f, 3f);
             if (other.gameObject.tag == "Fragment")
-                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion*1.3f, 3f);
+            if (other.gameObject.tag == "Props")
+                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion*1.3f, 3f);
             if(other.gameObject.tag == "Player")
             {
                 CooldownBomb life = other.GetComponent<CooldownBomb>();
