@@ -2756,7 +2756,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 54956790194642089, guid: 81302943773d51e45b47bf6d79e2ec95, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 841736646}
   m_SourcePrefab: {fileID: 100100000, guid: 81302943773d51e45b47bf6d79e2ec95, type: 3}
 --- !u!4 &841736643 stripped
 Transform:
@@ -2774,6 +2777,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34e317a73f181c4d8275bbe0e113932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &841736645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 54956790194642089, guid: 81302943773d51e45b47bf6d79e2ec95, type: 3}
+  m_PrefabInstance: {fileID: 841736642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &841736646
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841736645}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 5464c15ff9c6ca04cb5790c1773e76fa, type: 2}
 --- !u!1 &841742284
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,7 +4167,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6228368453379778221, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1175792176}
   m_SourcePrefab: {fileID: 100100000, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
 --- !u!4 &1175792173 stripped
 Transform:
@@ -4168,6 +4188,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34e317a73f181c4d8275bbe0e113932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1175792175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6228368453379778221, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
+  m_PrefabInstance: {fileID: 1175792172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &1175792176
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175792175}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 5464c15ff9c6ca04cb5790c1773e76fa, type: 2}
 --- !u!114 &1175792179 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3528041289001567046, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
