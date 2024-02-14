@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +28,7 @@ public class MakeAllRespon : MonoBehaviour
         {
             PlayerPrefs.SetInt("Score1", 0);
             PlayerPrefs.SetInt("Score2", 0);
+            SceneManager.LoadScene("AmbroisePlay");
             SceneManager.LoadScene("AmbroisePlay");
         }
     }
