@@ -69,7 +69,7 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
         if (controler == CONTROLER.CLAVIER)
             rotationX -= Input.GetAxis("Mouse Y") * mouseSensiY;
         else
-            rotationX -= MyControler.rightStick.ReadValue().y;
+            rotationX -= MyControler.rightStick.ReadValue().y * 5f;
 
         rotationX = Mathf.Clamp(rotationX,-90, 90);
         cam.transform.localRotation = Quaternion.Euler(rotationX , 0f, 0f);
@@ -85,16 +85,14 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     }
     private void ZQSDMouvement()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-            Debug.Log("iui");
         int horizontal = Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) ? 0 : Input.GetKey(KeyCode.A) ? -100 : Input.GetKey(KeyCode.D) ? 100 : 0;
         int vertical = Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S) ? 0 : Input.GetKey(KeyCode.S) ? -100 : Input.GetKey(KeyCode.W) ? 100 : 0;
         Vector3 dir = Vector3.zero;
-        Debug.Log(horizontal);
+
         if (controler == CONTROLER.CLAVIER)
             dir =  Vector3.ClampMagnitude(new Vector3(horizontal, 0f,vertical), 1f);
         else
-             dir = Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
+            dir = Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
 
         rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
     }

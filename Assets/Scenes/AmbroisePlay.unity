@@ -21184,11 +21184,11 @@ PrefabInstance:
       objectReference: {fileID: 1317342660}
     - target: {fileID: 3528041289001567046, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
       propertyPath: mouseSensiX
-      value: 0.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3528041289001567046, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
       propertyPath: mouseSensiY
-      value: 0.02
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4759881906827332279, guid: 320578eb9f30cb0459bfe3d4e4cc2f74, type: 3}
       propertyPath: m_LocalPosition.x
