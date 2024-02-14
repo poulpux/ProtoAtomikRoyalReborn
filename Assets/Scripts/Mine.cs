@@ -10,11 +10,17 @@ public class Mine : MonoBehaviour
     [SerializeField] private float _timerExplosion;
     [SerializeField] private int damage;
 
+    public int id;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") )
         {
-            StartCoroutine(CoroutineIsPressed());
+            CooldownBomb id = collision.gameObject.GetComponent<CooldownBomb>();
+            if (id != null)
+            {
+                if (id.id != this.id)
+                    StartCoroutine(CoroutineIsPressed());
+            }
         }
     }
 

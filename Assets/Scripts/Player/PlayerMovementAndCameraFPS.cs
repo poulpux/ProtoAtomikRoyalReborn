@@ -47,10 +47,10 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controler == CONTROLER.MANETTE)
-            curseur.color = Color.white;
-        else
-            curseur.color = Color.red;
+        //if (controler == CONTROLER.MANETTE)
+        //    curseur.color = Color.white;
+        //else
+        //    curseur.color = Color.red;
 
         timer += Time.deltaTime;
         CamRotation();

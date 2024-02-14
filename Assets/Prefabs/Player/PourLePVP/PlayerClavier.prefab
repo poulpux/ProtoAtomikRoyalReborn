@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 2144450962853438267}
   m_Layer: 8
   m_Name: PlayerClavier
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 5483162051329746629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.44, y: 1, z: -6.64}
+  m_LocalPosition: {x: -0.64, y: 1, z: -12.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -263,6 +263,7 @@ MonoBehaviour:
   crounchScale: {x: 0, y: 0, z: 0}
   actualScale: {x: 0, y: 0, z: 0}
   _isCrounch: 0
+  curseur: {fileID: 0}
   controler: 1
 --- !u!114 &5497136526298439803
 MonoBehaviour:
@@ -352,3 +353,5 @@ MonoBehaviour:
   _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
   _throwForce: 30
   mine: 1
+  maxHp: 100
+  hp: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +10,14 @@ public class MancheManager : MonoBehaviour
     private CooldownBomb player1, player2;
 
     [SerializeField]
+    private TextMeshProUGUI pointJ1, pointJ2, winTxt;
+    [SerializeField]
     private int nbPointForWin = 5; 
 
     void Start()
     {
-        
+        pointJ1.text = PlayerPrefs.GetInt("Score2").ToString();
+        pointJ2.text = PlayerPrefs.GetInt("Score1").ToString();
     }
 
     void Update()
@@ -30,7 +34,7 @@ public class MancheManager : MonoBehaviour
 
     private void resetGame()
     {
-        SceneManager.LoadScene("AmbroisePlayer");
+        SceneManager.LoadScene("AmbroisePlay");
         PlayerPrefs.SetInt("Score1", 0);
         PlayerPrefs.SetInt("Score2", 0);
     }
@@ -45,7 +49,7 @@ public class MancheManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetInt("Score1", PlayerPrefs.GetInt("Score1") + 1);
-                SceneManager.LoadScene("AmbroisePlayer");
+                SceneManager.LoadScene("AmbroisePlay");
             }
         }
         else
@@ -55,14 +59,16 @@ public class MancheManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetInt("Score2", PlayerPrefs.GetInt("Score2") + 1);
-                SceneManager.LoadScene("AmbroisePlayer");
+                SceneManager.LoadScene("AmbroisePlay");
             }
         }
-        SceneManager.LoadScene("AmbroisePlayer");
     }
 
     private void Victory(bool player1)
     {
-
+        if (player1)
+            winTxt.text = "Player 1 Victory !!!";
+        else
+            winTxt.text = "Player 2 Victory !!!";
     }
 }

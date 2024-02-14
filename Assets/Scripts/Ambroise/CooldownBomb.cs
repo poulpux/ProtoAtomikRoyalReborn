@@ -16,6 +16,8 @@ public class CooldownBomb : MonoBehaviour
     private int nbMaxMine;
     [SerializeField] private int nbMaxBomb;
 
+    public int id;
+
     [SerializeField]
     private PlayerMovementAndCameraFPS player;
     [SerializeField] private Camera _Camera;
@@ -72,6 +74,7 @@ public class CooldownBomb : MonoBehaviour
             if (Input.GetMouseButtonDown(1) && mine && nbMine > 0)
             {
                 Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
+                mine.id = id;
                 nbMine--;
             }
         }
@@ -89,6 +92,7 @@ public class CooldownBomb : MonoBehaviour
             {
                 Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
                 timer = 0f;
+                mine.id = id;
                 nbMine--;
             }
         }

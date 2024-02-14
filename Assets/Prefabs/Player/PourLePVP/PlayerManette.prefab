@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 422065688345878211}
   m_Layer: 8
   m_Name: PlayerManette
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,14 +34,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924365416677121217}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.2, y: 1, z: -9.1}
+  m_LocalRotation: {x: -0, y: 0.9980754, z: -0, w: 0.06201214}
+  m_LocalPosition: {x: 0.6047568, y: 1, z: 11.901537}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3055944172462098314}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 172.889, z: 0}
 --- !u!33 &511698019747388394
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spdMoovement: 5
-  mouseSensiX: 2
-  mouseSensiY: 2
+  mouseSensiX: 1.5
+  mouseSensiY: 1
   cam: {fileID: 2499787410277895917}
   AboutTool: 'C''est un outil qui Garenti des mouvements pour FPS cleans dont:
 
@@ -171,6 +171,7 @@ MonoBehaviour:
   crounchScale: {x: 0, y: 0, z: 0}
   actualScale: {x: 0, y: 0, z: 0}
   _isCrounch: 0
+  curseur: {fileID: 0}
   controler: 0
 --- !u!114 &1938063484732873343
 MonoBehaviour:
@@ -254,12 +255,15 @@ MonoBehaviour:
   cooldownMine: 5
   nbMaxMine: 4
   nbMaxBomb: 5
+  id: 1
   player: {fileID: 3528041289001567046}
   _Camera: {fileID: 2499787410277895917}
   _grenadePrefab: {fileID: 8433283994375064560, guid: c8238286153cd1c4794894ef877a5ecd, type: 3}
   _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
   _throwForce: 30
   mine: 1
+  maxHp: 100
+  hp: 0
 --- !u!1 &6228368453379778221
 GameObject:
   m_ObjectHideFlags: 0
