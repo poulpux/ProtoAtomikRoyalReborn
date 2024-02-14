@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/AmbroisePlay.unity
+    guid: d68cdbfc9ea69874bbad166c6830754e
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 34b89b04a8a122644903992931011823
   - enabled: 1

@@ -9,7 +9,7 @@ public class DestructionParMur : MonoBehaviour
 {
     private Rigidbody rb;
     public List< GameObject> childs = new List<GameObject>();
-    public List< Collider> childsColliders = new List<Collider>();
+    public List<Collider> childsColliders = new List<Collider>();
     private int nbChild;
 
     [HideInInspector]
