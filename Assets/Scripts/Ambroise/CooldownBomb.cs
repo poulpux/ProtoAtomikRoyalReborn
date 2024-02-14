@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class CooldownBomb : MonoBehaviour
     public int id;
 
     [SerializeField]
+    private GameObject Enviro;
+
+    [SerializeField]
     private PlayerMovementAndCameraFPS player;
     [SerializeField] private Camera _Camera;
     [SerializeField] private Grenade _grenadePrefab;
@@ -35,9 +39,12 @@ public class CooldownBomb : MonoBehaviour
     [HideInInspector]
     public int hp;
 
+    private bool doOneTime;
+
     void Start()
     {
         hp = maxHp;
+        Tools.TimeScale(1f);
     }
 
     void Update()
@@ -45,20 +52,25 @@ public class CooldownBomb : MonoBehaviour
         timerBomb += Time.deltaTime;
         timerMine += Time.deltaTime;
 
-        if(timerBomb > cooldownBomb && nbBomb < nbMaxBomb)
+        if(timerBomb > cooldownBomb && nbBomb < nbMaxBomb && hp > 0)
         {
             timerBomb = 0f;
             nbBomb++;
         }
         
-        if(timerMine > cooldownMine && nbMine < nbMaxMine)
+        if(timerMine > cooldownMine && nbMine < nbMaxMine && hp > 0)
         {
             timerMine = 0f;
             nbMine++;
         }
         ThowNadeAndCo();
 
-
+        if (hp <= 0 && !doOneTime)
+        {
+            _Camera.gameObject.transform.SetParent(Enviro.transform);
+            Destroy(gameObject);
+            doOneTime = true;   
+        }
     }
 
     private void ThowNadeAndCo()
@@ -96,5 +108,40 @@ public class CooldownBomb : MonoBehaviour
                 nbMine--;
             }
         }
+
+
     }
+
+    private void OnDestroy()
+    {
+        Explose();
+        ExploRange();
+    }
+
+    private void ExploRange()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
+        foreach (Collider collider in colliders)
+        {
+            PousseObjects(collider);
+        }
+    }
+
+    private void PousseObjects(Collider collider)
+    {
+        Rigidbody other = collider.GetComponent<Rigidbody>();
+        //Manequin manequin = collider.GetComponent<Manequin>();
+        if (other != null)
+        {
+            if (other.gameObject.tag == "Fragment")
+                other.AddExplosionForce(3000 * 5f, transform.position, 2f, 3f);
+            
+        }
+    }
+
+    private void Explose()
+    {
+        ToolExplosion.BrokeObject(gameObject, transform, 3000, true, 0.7f);
+    }
+
 }

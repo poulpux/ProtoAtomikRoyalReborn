@@ -25,10 +25,11 @@ public class MancheManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
             resetGame();
 
-        if(player1.hp <= 0)
-            MancheGagné(true);
+        if (player1.hp <= 0)
+            StartCoroutine(DelayedMancheGagné(true));
         if(player2.hp <= 0)
-            MancheGagné(false);
+            StartCoroutine(DelayedMancheGagné(false));
+           
 
     }
 
@@ -38,6 +39,17 @@ public class MancheManager : MonoBehaviour
         PlayerPrefs.SetInt("Score1", 0);
         PlayerPrefs.SetInt("Score2", 0);
     }
+
+    IEnumerator DelayedMancheGagné(bool player1)
+    {
+        Tools.TimeScale(0.2f);
+        // Attendez pendant 3 secondes
+        yield return new WaitForSeconds(0.75f);
+
+        // Appelez la fonction MancheGagné avec un joueur fictif (par exemple, le joueur 1)
+        MancheGagné(player1);
+    }
+
 
     private void MancheGagné(bool player1)
     {
