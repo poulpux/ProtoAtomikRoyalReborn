@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MakeAllRespon : MonoBehaviour
 {
@@ -20,8 +22,14 @@ public class MakeAllRespon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Destroy(save);
-            save = Instantiate(objet);
+            SceneManager.LoadScene("Game");
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            PlayerPrefs.SetInt("Score1", 0);
+            PlayerPrefs.SetInt("Score2", 0);
+            SceneManager.LoadScene("AmbroisePlay");
         }
     }
 }
