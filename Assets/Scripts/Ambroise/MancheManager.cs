@@ -35,9 +35,11 @@ public class MancheManager : MonoBehaviour
 
     private void resetGame()
     {
-        SceneManager.LoadScene("AmbroisePlay");
         PlayerPrefs.SetInt("Score1", 0);
         PlayerPrefs.SetInt("Score2", 0);
+        DestroyAll();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("AmbroisePlay");
+        //SceneManager.LoadScene("AmbroisePlay");
     }
 
     IEnumerator DelayedMancheGagné(bool player1)
@@ -61,7 +63,9 @@ public class MancheManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetInt("Score1", PlayerPrefs.GetInt("Score1") + 1);
-                SceneManager.LoadScene("AmbroisePlay");
+                DestroyAll();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("AmbroisePlay");
+                //SceneManager.LoadScene("AmbroisePlay");
             }
         }
         else
@@ -71,7 +75,9 @@ public class MancheManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetInt("Score2", PlayerPrefs.GetInt("Score2") + 1);
-                SceneManager.LoadScene("AmbroisePlay");
+                DestroyAll();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("AmbroisePlay");
+                //SceneManager.LoadScene("AmbroisePlay");
             }
         }
     }
@@ -82,5 +88,18 @@ public class MancheManager : MonoBehaviour
             winTxt.text = "Player 2 Victory !!!";
         else
             winTxt.text = "Player 1 Victory !!!";
+    }
+
+    private void DestroyAll()
+    {
+        GameObject[] objectsToDestroy = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (var obj in objectsToDestroy)
+        {
+            if (obj != gameObject)
+            {
+                Destroy(obj);
+            }
+        }
     }
 }
