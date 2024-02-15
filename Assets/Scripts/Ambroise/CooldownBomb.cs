@@ -89,12 +89,14 @@ public class CooldownBomb : MonoBehaviour
 
     void Update()
     {
-        timerHitFeedback += Time.deltaTime;
-        if(timerHitFeedback < 0.3f)
-            hitFeedbackk.gameObject.SetActive(true);
-        else
-            hitFeedbackk.gameObject.SetActive(false);
-
+        if (!godMod)
+        {
+            timerHitFeedback += Time.deltaTime;
+            if (timerHitFeedback < 0.3f)
+                hitFeedbackk.gameObject.SetActive(true);
+            else
+                hitFeedbackk.gameObject.SetActive(false);
+        }
         PlayerCurve();
         if (godMod)
         {

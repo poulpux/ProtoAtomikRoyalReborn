@@ -5752,14 +5752,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 763247483}
     - target: {fileID: 3285974661930399938, guid: 4343327942311a540a1b822397b33453, type: 3}
-      propertyPath: godMod
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285974661930399938, guid: 4343327942311a540a1b822397b33453, type: 3}
-      propertyPath: _AudioWIN
-      value: 
-      objectReference: {fileID: 8300000, guid: c15cbf9fd29809e438fc4170ddeedc2d, type: 3}
-    - target: {fileID: 3285974661930399938, guid: 4343327942311a540a1b822397b33453, type: 3}
       propertyPath: HitFeedback
       value: 
       objectReference: {fileID: 1450387202}
@@ -5771,17 +5763,9 @@ PrefabInstance:
       propertyPath: hitFeedbackk
       value: 
       objectReference: {fileID: 811336880}
-    - target: {fileID: 3285974661930399938, guid: 4343327942311a540a1b822397b33453, type: 3}
-      propertyPath: _AudioHITSLOW
-      value: 
-      objectReference: {fileID: 8300000, guid: 4b1e654eed50afb4b92efce1d09324f9, type: 3}
     - target: {fileID: 3800502843841259717, guid: 4343327942311a540a1b822397b33453, type: 3}
       propertyPath: m_Name
       value: PlayerNumber2 Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4876821261026955738, guid: 4343327942311a540a1b822397b33453, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7499,14 +7483,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 763247483}
     - target: {fileID: 5287972144489977134, guid: 0681d82b8b7e1c446ab1e096561cc0e1, type: 3}
-      propertyPath: godMod
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5287972144489977134, guid: 0681d82b8b7e1c446ab1e096561cc0e1, type: 3}
-      propertyPath: _AudioWIN
-      value: 
-      objectReference: {fileID: 8300000, guid: c15cbf9fd29809e438fc4170ddeedc2d, type: 3}
-    - target: {fileID: 5287972144489977134, guid: 0681d82b8b7e1c446ab1e096561cc0e1, type: 3}
       propertyPath: HitFeedback
       value: 
       objectReference: {fileID: 1673182019}
@@ -7518,10 +7494,6 @@ PrefabInstance:
       propertyPath: hitFeedbackk
       value: 
       objectReference: {fileID: 130003653}
-    - target: {fileID: 5287972144489977134, guid: 0681d82b8b7e1c446ab1e096561cc0e1, type: 3}
-      propertyPath: _AudioHITSLOW
-      value: 
-      objectReference: {fileID: 8300000, guid: 4b1e654eed50afb4b92efce1d09324f9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

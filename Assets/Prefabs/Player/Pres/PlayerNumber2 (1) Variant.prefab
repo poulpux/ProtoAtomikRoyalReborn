@@ -377,7 +377,12 @@ MonoBehaviour:
   maxHp: 100
   hp: 0
   playerControls: {fileID: -944628639613478452, guid: 5ee6da0988448c04da0ba8ca7ae2c790, type: 3}
-  godMod: 1
+  godMod: 0
+  HitFeedback: {fileID: 0}
+  hitFeedbackk: {fileID: 0}
+  _AudioSource: {fileID: 0}
+  _AudioHITSLOW: {fileID: 8300000, guid: 4b1e654eed50afb4b92efce1d09324f9, type: 3}
+  _AudioWIN: {fileID: 8300000, guid: c15cbf9fd29809e438fc4170ddeedc2d, type: 3}
 --- !u!114 &-4804244365693191660
 MonoBehaviour:
   m_ObjectHideFlags: 0

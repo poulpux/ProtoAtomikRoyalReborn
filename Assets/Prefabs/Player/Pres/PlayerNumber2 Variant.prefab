@@ -174,7 +174,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2236589586641759847}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!1 &3800502843841259717
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +460,12 @@ MonoBehaviour:
   maxHp: 100
   hp: 0
   playerControls: {fileID: -944628639613478452, guid: 392392fabb848b94d8efd1ddf3a6801c, type: 3}
-  godMod: 1
+  godMod: 0
+  HitFeedback: {fileID: 0}
+  hitFeedbackk: {fileID: 0}
+  _AudioSource: {fileID: 0}
+  _AudioHITSLOW: {fileID: 8300000, guid: 4b1e654eed50afb4b92efce1d09324f9, type: 3}
+  _AudioWIN: {fileID: 8300000, guid: c15cbf9fd29809e438fc4170ddeedc2d, type: 3}
 --- !u!114 &-6027807510389152423
 MonoBehaviour:
   m_ObjectHideFlags: 0
