@@ -106,7 +106,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -176,7 +176,6 @@ MonoBehaviour:
   GetNeightbour: 0
   parent: {fileID: 0}
   FieldParent: {fileID: 0}
-  rendererr: {fileID: 4300000, guid: 8dca5595cdaced544b3bca78ca84e8d8, type: 3}
 --- !u!65 &7355875633585226625
 BoxCollider:
   m_ObjectHideFlags: 0
