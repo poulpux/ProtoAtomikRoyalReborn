@@ -10,8 +10,13 @@ public class Explosion : MonoBehaviour
     [HideInInspector] public float _radiusExplosion;
     [HideInInspector] public float _forceExplosion;
     [HideInInspector] public int damage;
+    [SerializeField] AudioSource _AudioSource;
+    [SerializeField] AudioClip _Audioexplosion;
+    [SerializeField] AudioClip _Audiohit;
     void Start()
     {
+        _AudioSource = FindFirstObjectByType<AudioSource>();
+        _AudioSource.PlayOneShot(_Audioexplosion);
         GameObject particule = Instantiate(_particulePrefab, transform.position, Quaternion.identity);
         particule.transform.localScale = new Vector3(_radiusExplosion*2f,_radiusExplosion*2f,_radiusExplosion*2f);
         Destroy(this.gameObject);
@@ -46,10 +51,11 @@ public class Explosion : MonoBehaviour
             if (other.gameObject.tag == "Props")
                 other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion*1.3f, 3f);
             if(other.gameObject.tag == "Player")
-            {
+            {               
                 CooldownBomb life = other.GetComponent<CooldownBomb>();
                 if(life != null)
                 {
+                    _AudioSource.PlayOneShot(_Audiohit);
                     life.hp -= 20;
                 }
             }

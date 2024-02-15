@@ -48,6 +48,10 @@ public class CooldownBomb : MonoBehaviour
     [SerializeField]
     private bool godMod;
 
+    [SerializeField] AudioSource _AudioSource;
+    [SerializeField] AudioClip _AudioHITSLOW;
+    [SerializeField] AudioClip _AudioWIN;
+
     void Awake()
     {
         shootBombeAction = playerControls.FindActionMap("Player").FindAction("ShootBombe");
@@ -99,6 +103,8 @@ public class CooldownBomb : MonoBehaviour
 
         if (hp <= 0 && !doOneTime && !godMod)
         {
+            _AudioSource.PlayOneShot(_AudioHITSLOW);
+            _AudioSource.PlayOneShot(_AudioWIN);
             _Camera.gameObject.transform.SetParent(Enviro.transform);
             Destroy(gameObject);
             doOneTime = true;
