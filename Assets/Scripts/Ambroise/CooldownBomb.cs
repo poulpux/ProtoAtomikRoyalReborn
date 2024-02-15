@@ -23,7 +23,7 @@ public class CooldownBomb : MonoBehaviour
     private GameObject Enviro;
 
     [SerializeField]
-    private PlayerMovementAndCameraFPS player;
+    private PlayerMovementInput player;
     [SerializeField] private Camera _Camera;
     [SerializeField] private Grenade _grenadePrefab;
     [SerializeField] private Mine _mine;
@@ -32,7 +32,7 @@ public class CooldownBomb : MonoBehaviour
     public bool mine = true;
 
     private float timer;
-    
+
     public int maxHp = 100;
 
 
@@ -40,6 +40,30 @@ public class CooldownBomb : MonoBehaviour
     public int hp;
 
     private bool doOneTime;
+
+    [SerializeField] private InputActionAsset playerControls;
+    private InputAction shootBombeAction;
+    private InputAction shootMineAction;
+
+    [SerializeField]
+    private bool godMod;
+
+    void Awake()
+    {
+        shootBombeAction = playerControls.FindActionMap("Player").FindAction("ShootBombe");
+        shootMineAction = playerControls.FindActionMap("Player").FindAction("ShootMine");
+    }
+
+    private void OnEnable()
+    {
+        shootBombeAction.Enable();
+        shootMineAction.Enable();
+    }
+    private void OnDisable()
+    {
+        shootBombeAction.Disable();
+        shootMineAction.Disable();
+    }
 
     void Start()
     {
@@ -49,66 +73,52 @@ public class CooldownBomb : MonoBehaviour
 
     void Update()
     {
-        if(nbBomb < nbMaxBomb)
+
+        if (godMod)
+        {
+            nbBomb = 99;
+            nbMine = 99;
+        }
+        if (nbBomb < nbMaxBomb)
             timerBomb += Time.deltaTime;
-        if(nbMine < nbMaxMine)
+        if (nbMine < nbMaxMine)
             timerMine += Time.deltaTime;
 
-        if(timerBomb > cooldownBomb && nbBomb < nbMaxBomb && hp > 0)
+        if (timerBomb > cooldownBomb && nbBomb < nbMaxBomb && hp > 0)
         {
             timerBomb = 0f;
             nbBomb++;
         }
-        
-        if(timerMine > cooldownMine && nbMine < nbMaxMine && hp > 0)
+
+        if (timerMine > cooldownMine && nbMine < nbMaxMine && hp > 0)
         {
             timerMine = 0f;
             nbMine++;
         }
         ThowNadeAndCo();
 
-        if (hp <= 0 && !doOneTime)
+        if (hp <= 0 && !doOneTime && !godMod)
         {
             _Camera.gameObject.transform.SetParent(Enviro.transform);
             Destroy(gameObject);
-            doOneTime = true;   
+            doOneTime = true;
         }
     }
 
     private void ThowNadeAndCo()
     {
-        if (player.controler == CONTROLER.CLAVIER)
+
+        if (shootBombeAction.triggered && nbBomb > 0)
         {
-            if (Input.GetMouseButtonDown(0) && nbBomb >0)
-            {
-                Grenade grenade = Instantiate(_grenadePrefab, _Camera.transform.position + transform.forward, Quaternion.identity);
-                grenade.rb.AddForce(_Camera.transform.forward * _throwForce, ForceMode.Impulse);
-                nbBomb--;
-            }
-            if (Input.GetMouseButtonDown(1) && mine && nbMine > 0)
-            {
-                Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
-                mine.id = id;
-                nbMine--;
-            }
+            Grenade grenade = Instantiate(_grenadePrefab, _Camera.transform.position + transform.forward, Quaternion.identity);
+            grenade.rb.AddForce(_Camera.transform.forward * _throwForce, ForceMode.Impulse);
+            nbBomb--;
         }
-        else
+        if (shootMineAction.triggered && mine && nbMine > 0)
         {
-            timer += Time.deltaTime;
-            if (player.MyControler != null && player.MyControler.rightTrigger.IsPressed() == true && timer > 0.2f && nbBomb > 0)
-            {
-                Grenade grenade = Instantiate(_grenadePrefab, _Camera.transform.position + transform.forward, Quaternion.identity);
-                grenade.rb.AddForce(_Camera.transform.forward * _throwForce, ForceMode.Impulse);
-                timer = 0f;
-                nbBomb--;
-            }
-            if (player.MyControler != null && player.MyControler.leftTrigger.IsPressed() == true && mine && timer > 0.2f && nbMine > 0)
-            {
-                Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
-                timer = 0f;
-                mine.id = id;
-                nbMine--;
-            }
+            Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
+            mine.id = id;
+            nbMine--;
         }
 
 
@@ -137,7 +147,7 @@ public class CooldownBomb : MonoBehaviour
         {
             if (other.gameObject.tag == "Fragment")
                 other.AddExplosionForce(3000 * 5f, transform.position, 2f, 3f);
-            
+
         }
     }
 

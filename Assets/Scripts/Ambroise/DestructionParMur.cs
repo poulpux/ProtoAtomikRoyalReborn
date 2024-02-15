@@ -54,9 +54,13 @@ public class DestructionParMur : MonoBehaviour
         foreach (var item in childs)
         {
             BoxCollider parentCollider = gameObject.AddComponent<BoxCollider>();
-            parentCollider.size = item.transform.localScale;
-            parentCollider.center = item.transform.localPosition;
-            childsColliders.Add(parentCollider);
+            if (parentCollider != null)
+            {
+                parentCollider.size = item.transform.localScale;
+                parentCollider.center = item.transform.localPosition;
+                if(childsColliders != null)
+                    childsColliders.Add(parentCollider);
+            }
         }
     }
 

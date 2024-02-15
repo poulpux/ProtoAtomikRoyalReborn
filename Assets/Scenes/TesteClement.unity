@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceAttrape: 1.5
-  timeToGrimpe: 1
+  timeToGrimpe: 0.5
   _playerMovementInput: {fileID: 71683773}
   config: {fileID: 0}
 --- !u!1 &752407321
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceAttrape: 1.5
-  timeToGrimpe: 1
+  timeToGrimpe: 0.5
   _playerMovementInput: {fileID: 1061988124}
   config: {fileID: 0}
 --- !u!1 &1306510991
