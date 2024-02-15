@@ -13,6 +13,8 @@ public class Explosion : MonoBehaviour
     [SerializeField] AudioSource _AudioSource;
     [SerializeField] AudioClip _Audioexplosion;
     [SerializeField] AudioClip _Audiohit;
+    public CooldownBomb owner;
+    public int id;
     void Start()
     {
         _AudioSource = FindFirstObjectByType<AudioSource>();
@@ -56,6 +58,8 @@ public class Explosion : MonoBehaviour
                 if(life != null)
                 {
                     _AudioSource.PlayOneShot(_Audiohit);
+                    if (life.id != owner.id)
+                        owner.hitFeedback();
                     life.hp -= 20;
                 }
             }

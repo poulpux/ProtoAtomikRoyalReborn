@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CooldownBomb : MonoBehaviour
 {
@@ -47,6 +48,15 @@ public class CooldownBomb : MonoBehaviour
 
     [SerializeField]
     private bool godMod;
+    [SerializeField]
+    private Image HitFeedback;
+    private AnimatingCurve curveGo, curveDown;
+
+    int saveLife;
+
+    float timerHitFeedback;
+    [SerializeField]
+    private Image hitFeedbackk;
 
     [SerializeField] AudioSource _AudioSource;
     [SerializeField] AudioClip _AudioHITSLOW;
@@ -72,12 +82,20 @@ public class CooldownBomb : MonoBehaviour
     void Start()
     {
         hp = maxHp;
+        saveLife = hp;
+        timerHitFeedback = 20f;
         Tools.TimeScale(1f);
     }
 
     void Update()
     {
+        timerHitFeedback += Time.deltaTime;
+        if(timerHitFeedback < 0.3f)
+            hitFeedbackk.gameObject.SetActive(true);
+        else
+            hitFeedbackk.gameObject.SetActive(false);
 
+        PlayerCurve();
         if (godMod)
         {
             nbBomb = 99;
@@ -109,6 +127,12 @@ public class CooldownBomb : MonoBehaviour
             Destroy(gameObject);
             doOneTime = true;
         }
+
+        if(hp != saveLife)
+        {
+            TakeDamageFeedback();
+            saveLife = hp;
+        }
     }
 
     private void ThowNadeAndCo()
@@ -118,12 +142,15 @@ public class CooldownBomb : MonoBehaviour
         {
             Grenade grenade = Instantiate(_grenadePrefab, _Camera.transform.position + transform.forward, Quaternion.identity);
             grenade.rb.AddForce(_Camera.transform.forward * _throwForce, ForceMode.Impulse);
+            grenade.id = id;
+            grenade.owner = this;
             nbBomb--;
         }
         if (shootMineAction.triggered && mine && nbMine > 0)
         {
             Mine mine = Instantiate(_mine, _Camera.transform.position + (transform.forward * 2.5f), Quaternion.identity);
             mine.id = id;
+            mine.owner = this;
             nbMine--;
         }
 
@@ -159,7 +186,40 @@ public class CooldownBomb : MonoBehaviour
 
     private void Explose()
     {
-        ToolExplosion.BrokeObject(gameObject, transform, 3000, true, 0.7f);
+        ToolExplosion.BrokeObject(gameObject, transform, 3000, true, 1.7f);
+    }
+
+    public void TakeDamageFeedback()
+    {
+        if(!godMod)
+        {
+            curveGo = new AnimatingCurve(0f,1f,0.2f, GRAPH.EASESIN, INANDOUT.OUT, LOOP.CLAMP);
+            curveDown = new AnimatingCurve(1f,0f,0.2f, GRAPH.LINEAR, INANDOUT.OUT, LOOP.CLAMP);
+        }
+    }
+
+    private void PlayerCurve()
+    {
+        if(curveGo.duration > 0)
+        {
+            if(!Tools.isCurveFinish(curveGo))
+            {
+                float transparence = HitFeedback.color.a;
+                Tools.PlayCurve(ref curveGo,ref transparence);
+                HitFeedback.color= new Color(HitFeedback.color.r, HitFeedback.color.g, HitFeedback.color.b, transparence);
+            }
+            else 
+            {
+                float transparence = HitFeedback.color.a;
+                Tools.PlayCurve(ref curveDown, ref transparence);
+                HitFeedback.color = new Color(HitFeedback.color.r, HitFeedback.color.g, HitFeedback.color.b, transparence);
+            }
+        }
+    }
+
+    public void hitFeedback()
+    {
+        timerHitFeedback = 0f;
     }
 
 }
