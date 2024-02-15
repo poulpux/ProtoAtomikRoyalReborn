@@ -180,7 +180,7 @@ public class CooldownBomb : MonoBehaviour
 
     private void Explose()
     {
-        ToolExplosion.BrokeObject(gameObject, transform, 3000, true, 0.7f);
+        ToolExplosion.BrokeObject(gameObject, transform, 3000, true, 1.7f);
     }
 
     public void TakeDamageFeedback()
