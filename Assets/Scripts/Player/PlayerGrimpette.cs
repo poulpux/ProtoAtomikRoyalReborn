@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-[RequireComponent(typeof(JumpFPS))]
 public class PlayerGrimpette : MonoBehaviour
 {
     [SerializeField]
@@ -12,7 +11,7 @@ public class PlayerGrimpette : MonoBehaviour
     [SerializeField]
     private float timeToGrimpe = 1f;
 
-    private JumpFPS jump;
+    [SerializeField] private PlayerMovementInput _playerMovementInput;
 
     private Vector3 posToGo;
     private AnimatingCurve animCurveVertical, animCurveHorizontal;
@@ -21,15 +20,14 @@ public class PlayerGrimpette : MonoBehaviour
     private PlayerMovementAndCameraFPS config;
     void Start()
     {
-        jump = GetComponent<JumpFPS>();
+
     }
 
     void Update()
     {
-        if(config.controler == CONTROLER.CLAVIER && !jump.testToucheGround() && Input.GetKeyDown(KeyCode.Space))
+        if (!_playerMovementInput.testToucheGround() && _playerMovementInput.jumpAction.triggered)
             tryGrimpette();
-        else if(config.controler == CONTROLER.MANETTE && !jump.testToucheGround() && config.MyControler != null  && config.MyControler.buttonSouth.IsPressed() == true)
-            tryGrimpette();
+
         PlayCurve();
     }
 
@@ -38,8 +36,8 @@ public class PlayerGrimpette : MonoBehaviour
         Vector3 posToGo = FindPosGrimpette();
         if (posToGo != Vector3.zero)
         {
-            animCurveVertical = new AnimatingCurve(transform.position,new Vector3(transform.position.x, posToGo.y, transform.position.z), timeToGrimpe /2f, GRAPH.EASESIN, INANDOUT.IN, LOOP.CLAMP);
-            animCurveHorizontal = new AnimatingCurve(new Vector3(transform.position.x,posToGo.y, transform.position.z), posToGo, timeToGrimpe /2f, GRAPH.EASESIN, INANDOUT.IN, LOOP.CLAMP);
+            animCurveVertical = new AnimatingCurve(transform.position, new Vector3(transform.position.x, posToGo.y, transform.position.z), timeToGrimpe / 2f, GRAPH.EASESIN, INANDOUT.IN, LOOP.CLAMP);
+            animCurveHorizontal = new AnimatingCurve(new Vector3(transform.position.x, posToGo.y, transform.position.z), posToGo, timeToGrimpe / 2f, GRAPH.EASESIN, INANDOUT.IN, LOOP.CLAMP);
         }
     }
 
@@ -47,7 +45,7 @@ public class PlayerGrimpette : MonoBehaviour
     {
         Ray ray1 = new Ray(transform.position - Vector3.up * 0.5f, transform.forward);
         Ray ray2 = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
-        Ray ray3 = new Ray(transform.position , transform.forward);
+        Ray ray3 = new Ray(transform.position, transform.forward);
 
         Vector3 result1 = ThrowRaycast(ray1);
         if (result1 != Vector3.zero)
@@ -84,12 +82,12 @@ public class PlayerGrimpette : MonoBehaviour
 
     private void PlayCurve()
     {
-        if(animCurveVertical.beginValue != Vector3.zero)
+        if (animCurveVertical.beginValue != Vector3.zero)
         {
             if (!Tools.isCurveFinish(animCurveVertical))
             {
                 Vector3 pos = transform.position;
-                Tools.PlayCurve(ref animCurveVertical,ref pos);
+                Tools.PlayCurve(ref animCurveVertical, ref pos);
                 transform.position = pos;
             }
             else

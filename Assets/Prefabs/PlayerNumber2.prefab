@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3963788421563120162}
   - component: {fileID: 2722341343659767385}
   m_Layer: 0
-  m_Name: PlayerNumber1
+  m_Name: PlayerNumber2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 5749751629058336147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 2.1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -156,12 +156,21 @@ MonoBehaviour:
   _camera: {fileID: 1345690708316819230}
   rb: {fileID: 3285558742935028453}
   jumpForce: 500
-  playerControls: {fileID: -944628639613478452, guid: 5ee6da0988448c04da0ba8ca7ae2c790, type: 3}
+  playerControls: {fileID: -944628639613478452, guid: 392392fabb848b94d8efd1ddf3a6801c, type: 3}
   sprintMultiplier: 10
   moveSpeed: 5
   mouseSensitivity: 2
   smoothInputSpeed: 0.075
   _playerSlideInput: {fileID: 3963788421563120162}
+  jumpAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7cf709d9-aab5-4609-9358-42561d382391
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   crounchAction:
     m_Name: 
     m_Type: 0
@@ -190,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72aff407d983b69419178418ec51674c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControls: {fileID: -944628639613478452, guid: 5ee6da0988448c04da0ba8ca7ae2c790, type: 3}
+  playerControls: {fileID: -944628639613478452, guid: 392392fabb848b94d8efd1ddf3a6801c, type: 3}
   _Camera: {fileID: 1345690708316819230}
   _grenadePrefab: {fileID: 8433283994375064560, guid: c8238286153cd1c4794894ef877a5ecd, type: 3}
   _mine: {fileID: 6982526881992882106, guid: baadf8785144a1749b4e87706ce22ed4, type: 3}
@@ -225,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 5ee6da0988448c04da0ba8ca7ae2c790, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 392392fabb848b94d8efd1ddf3a6801c, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -239,10 +248,10 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 1345690708316819230}
+  m_Camera: {fileID: 0}
 --- !u!1 &7240899756755870513
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +315,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 0.5
   near clip plane: 0.1
   far clip plane: 1000
   field of view: 70

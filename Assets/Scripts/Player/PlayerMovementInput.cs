@@ -25,7 +25,7 @@ public class PlayerMovementInput : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction jumpAction;
+    [HideInInspector] public InputAction jumpAction;
     private InputAction sprintAction;
     [HideInInspector] public InputAction crounchAction;
     [HideInInspector] public Vector2 moveInput;
