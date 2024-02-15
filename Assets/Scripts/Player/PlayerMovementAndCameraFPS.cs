@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementAndCameraFPS : MonoBehaviour
@@ -26,12 +28,16 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     [HideInInspector] public Vector3 actualScale;
     [HideInInspector] public bool _isCrounch = false;
 
+
+    [SerializeField]
+    private Image curseur;
     public Gamepad MyControler;
     public CONTROLER controler;
     private float timer;
     // Start is called before the first frame update
     void Start()
     {
+
         _speedSave = spdMoovement;
         rb = GetComponent<Rigidbody>();
         //On rend invisible la souris
@@ -41,6 +47,11 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (controler == CONTROLER.MANETTE)
+        //    curseur.color = Color.white;
+        //else
+        //    curseur.color = Color.red;
+
         timer += Time.deltaTime;
         CamRotation();
         ZQSDMouvement();
@@ -74,7 +85,15 @@ public class PlayerMovementAndCameraFPS : MonoBehaviour
     }
     private void ZQSDMouvement()
     {
-        Vector3 dir = controler == CONTROLER.CLAVIER ? Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")), 1f) : Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
+        int horizontal = Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) ? 0 : Input.GetKey(KeyCode.A) ? -100 : Input.GetKey(KeyCode.D) ? 100 : 0;
+        int vertical = Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S) ? 0 : Input.GetKey(KeyCode.S) ? -100 : Input.GetKey(KeyCode.W) ? 100 : 0;
+        Vector3 dir = Vector3.zero;
+
+        if (controler == CONTROLER.CLAVIER)
+            dir =  Vector3.ClampMagnitude(new Vector3(horizontal, 0f,vertical), 1f);
+        else
+            dir = Vector3.ClampMagnitude(new Vector3(MyControler.leftStick.ReadValue().x, 0f, MyControler.leftStick.ReadValue().y), 1f);
+
         rb.velocity = transform.localRotation * new Vector3(dir.x * spdMoovement, rb.velocity.y, dir.z * spdMoovement);
     }
     private void Run()

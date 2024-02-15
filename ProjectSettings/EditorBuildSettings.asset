@@ -6,17 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TesteClement.unity
-    guid: e6631546b19de9f45a5354defc97d8ff
+    path: Assets/Scenes/Game.unity
+    guid: 647c6f82a3371894cb5cc7cf67b7d449
   - enabled: 1
-    path: Assets/Scenes/Game1Player 2.unity
-    guid: 4b8cf408bdb0bd843825f3c1c7f504b4
+    path: Assets/Scenes/AmbroisePlay.unity
+    guid: d68cdbfc9ea69874bbad166c6830754e
   - enabled: 1
-    path: Assets/Scenes/PlayTestClement.unity
-    guid: a4b06533b154f1e4a81fe730e71edfb3
+    path: Assets/Scenes/Menu.unity
+    guid: 34b89b04a8a122644903992931011823
   - enabled: 1
-    path: Assets/Scenes/Game1Player.unity
-    guid: 56633291bfe86ff4581bfdcc5d6b2659
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 47e118f0fd55d184ab1f13edba5facae, type: 2}
+    path: Assets/Scenes/SceneAmbroise.unity
+    guid: 550fe0fd0c943694cb52a61b65b88603
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

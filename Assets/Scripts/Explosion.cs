@@ -13,6 +13,7 @@ public class Explosion : MonoBehaviour
     void Start()
     {
         GameObject particule = Instantiate(_particulePrefab, transform.position, Quaternion.identity);
+        particule.transform.localScale = new Vector3(_radiusExplosion*2f,_radiusExplosion*2f,_radiusExplosion*2f);
         Destroy(this.gameObject);
     }
 
@@ -35,18 +36,28 @@ public class Explosion : MonoBehaviour
     private void PousseObjects(Collider collider)
     {
         Rigidbody other = collider.GetComponent<Rigidbody>();
-        PlayerStats playerStats = collider.GetComponent<PlayerStats>();
+        //Manequin manequin = collider.GetComponent<Manequin>();
         if (other != null)
         {
             if(other.tag != "Mur")
-                other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion, 3f);
+                other.AddExplosionForce(_forceExplosion, transform.position, _radiusExplosion*1.3f, 3f);
             if (other.gameObject.tag == "Fragment")
-                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
-            
-        }
-        if (playerStats != null)
-        {
-            playerStats._pv -= 20f;
+                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion*1.3f, 3f);
+            if (other.gameObject.tag == "Props")
+                other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion*1.3f, 3f);
+            if(other.gameObject.tag == "Player")
+            {
+                CooldownBomb life = other.GetComponent<CooldownBomb>();
+                if(life != null)
+                {
+                    life.hp -= 20;
+                }
+            }
+            //if (other.gameObject != manequin)
+            //{
+            //    other.AddExplosionForce(_forceExplosion * 5f, transform.position, _radiusExplosion, 3f);
+            //    manequin.TakeDamage(50);
+            //}
         }
     }
 
