@@ -10,6 +10,9 @@ public class Explosion : MonoBehaviour
     [HideInInspector] public float _radiusExplosion;
     [HideInInspector] public float _forceExplosion;
     [HideInInspector] public int damage;
+
+    public CooldownBomb owner;
+    public int id;
     void Start()
     {
         GameObject particule = Instantiate(_particulePrefab, transform.position, Quaternion.identity);
@@ -50,6 +53,8 @@ public class Explosion : MonoBehaviour
                 CooldownBomb life = other.GetComponent<CooldownBomb>();
                 if(life != null)
                 {
+                    if (life.id != owner.id)
+                        owner.hitFeedback();
                     life.hp -= 20;
                 }
             }

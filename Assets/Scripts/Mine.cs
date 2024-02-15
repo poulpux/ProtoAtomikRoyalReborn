@@ -10,6 +10,7 @@ public class Mine : MonoBehaviour
     [SerializeField] private float _timerExplosion;
     [SerializeField] private int damage;
 
+    public CooldownBomb owner;
     public int id;
     private void OnCollisionEnter(Collision collision)
     {
@@ -30,6 +31,8 @@ public class Mine : MonoBehaviour
         explosion._forceExplosion = forceExplosion;
         explosion._radiusExplosion = radiusExplosion;
         explosion.damage = damage;
+        explosion.id = id;
+        explosion.owner = owner;
     }
 
     private IEnumerator CoroutineIsPressed()
